@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Filip Krahl
+  description:
+  company: T-Systems Multimedia Solutions GmbH
+  license: Apache-2.0
+  min_ansible_version: 2.9
+  platforms:
+  - name: EPEL
+    versions:
+    - 7
+  categories:
+  - database
+  - database:sql
+dependencies: []

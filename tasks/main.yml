@@ -1,0 +1,136 @@
+---
+- name: install repmgr gpg key
+  copy:
+    dest: "{{ repmgr_gpg_file }}"
+    content: "{{ repmgr_gpg_key }}"
+  when: repmgr_install_gpg_key
+
+- name: install repmgr yum repository
+  yum_repository:
+     name: "repmgr_{{ postgres_release }}"
+     description: 2ndquadrant yum repo
+     baseurl: "{{ repmgr_repository }}"
+     gpgkey: "file:///{{ repmgr_gpg_file }}"
+  when: repmgr_install_repository
+
+- name: ensure postgresql is installed
+  yum:
+    name: "{{ postgres_package }}"
+    state: installed
+
+- name: install repmgr
+  yum:
+    name: "{{ repmgr_package }}"
+    state: present
+
+- name: ensure ssh directory
+  file:
+    path: "{{ postgres_ssh_dir }}"
+    state: directory
+  become: yes
+  become_user: "{{ repmgr_postgres_admin_user }}"
+
+- name: create ssh rsa key for postgres user
+  openssh_keypair:
+    path: "{{ postgres_ssh_rsa_key }}"
+  become: True
+  become_user: "{{ repmgr_postgres_admin_user }}"
+
+- name: create buffer directory 
+  file:
+    path: /tmp/repmgr_buffer/
+    state: directory
+  delegate_to: localhost
+  run_once: True
+
+- name: fetch ssh public keys from nodes
+  fetch:
+    dest: "/tmp/repmgr_buffer/{{ ansible_hostname }}_postgres_id_rsa_key.pub"
+    src: "{{ postgres_ssh_rsa_key }}.pub"
+    flat: True
+
+- name: merge public keys
+  assemble:
+    src: /tmp/ansible_buffer
+    dest: /tmp/postgres_authorized_keys
+  delegate_to: localhost
+  run_once: True
+
+- name: copy authorized key to host
+  copy:
+    src: '/tmp/postgres_authorized_keys'
+    dest: "{{ postgres_ssh_dir }}/authorized_keys"
+
+- name: set .ssh directory privileges
+  file:
+    path: "{{ postgres_ssh_dir }}"
+    owner: "{{ repmgr_postgres_admin_user }}"
+    group: "{{ repmgr_postgres_admin_user_group }}"
+    recurse: True
+    state: directory
+
+- name: create repmgr conf dir
+  file:
+    path: "{{ repmgr_conf_dir }}"
+    state: directory
+    recurse: yes
+
+- name: create repmgr conf
+  template:
+    src: repmgr.conf.j2
+    dest: "{{ repmgr_conf_dir }}/{{ repmgr_conf_file }}"
+  register: repmgr_conf
+  notify: restart repmgrd
+
+- name: Verify node status
+  shell: "/usr/pgsql-{{ postgres_release}}/bin/repmgr -f {{ repmgr_conf_dir }}/{{ repmgr_conf_file }} node check"
+  args: 
+    warn: false
+  changed_when: false
+  register: result
+  ignore_errors: true
+  become: yes
+  become_user: "{{ repmgr_postgres_admin_user }}"
+
+- name: Register master node
+  shell: "/usr/pgsql-{{ postgres_release}}/bin/repmgr -f {{ repmgr_conf_dir }}/{{ repmgr_conf_file }} primary register"
+  become: yes
+  become_user: "{{ repmgr_postgres_admin_user }}"
+  when: 
+    - repmgr_is_master|bool
+    - result is failed
+
+- name: Stop standby postgres
+  service:
+    name: "{{ postgres_service }}"
+    state: stopped
+  when:
+    - not repmgr_is_master|bool
+    - result is failed
+
+- name: Clone standby nodes
+  shell: "/usr/pgsql-{{ postgres_release}}/bin/repmgr -f {{ repmgr_conf_dir }}/{{ repmgr_conf_file }} -h {{ repmgr_default_master }} -U {{ repmgr_user }} -d {{ repmgr_dbname }} standby clone -F"
+  when:
+    - not repmgr_is_master|bool
+    - result is failed
+  become: yes
+  become_user: "{{ repmgr_postgres_admin_user }}"
+
+- name: Start standby postgres
+  service:
+    name: "{{ postgres_service }}"
+    state: started
+  when:
+    - not repmgr_is_master|bool
+    - result is failed
+
+- name: Standby register
+  shell: "/usr/pgsql-{{ postgres_release}}/bin/repmgr -f {{ repmgr_conf_dir }}/{{ repmgr_conf_file }} standby register"
+  when:
+    - not repmgr_is_master|bool
+    - result is failed
+  become: yes
+  become_user: "{{ repmgr_postgres_admin_user }}"
+
+
+  

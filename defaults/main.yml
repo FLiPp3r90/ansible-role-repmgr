@@ -1,0 +1,73 @@
+---
+# version
+postgres_release: 12
+repmgr_release: 5
+repmgr_package: "repmgr{{ postgres_release }}"
+postgres_package: "postgresql{{ postgres_release }}"
+repmgr_service: "repmgr{{postgres_release}}"
+postgres_service: "postgresql-{{postgres_release}}"
+repmgr_postgres_admin_user: 'postgres'
+repmgr_postgres_admin_user_group: 'postgres'
+postgres_ssh_dir: '/var/lib/pgsql/.ssh'
+postgres_ssh_rsa_key: "{{ postgres_ssh_dir }}/id_rsa"
+
+# repository
+repmgr_install_repository: True
+repmgr_install_gpg_key: True
+repmgr_repository: "https://dl.2ndquadrant.com/default/release/browse/rpm/packages/rhel/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/{{ postgres_release }}"
+repmgr_gpg_file: /etc/pki/rpm-gpg/RPM-GPG-KEY-2NDQ-DL-DEFAULT
+repmgr_gpg_key: "-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1
+
+mQINBFqpNU0BEAC6tFZf3Vt5FB4sG0pDeomVypnxTudww/bFm4ZWg3NsP4tnhaao
+ngO32/ExyyhLbYSIVsQIHYPEamzLJbJwCDTxMLE2x7NrXbC0xeel0Ku7YQcL5VZC
+EWNJapAIgynao5nTlPMxV4U5TT2BWT2FlbyyRUCn9ng6VvTuxMczF9yKtP4ITKwy
+DWe4EGJmxumFyiMzjH3QN96PT+kUfPgDbf6oQfCCZAauVzTpXmkWpt1bw5BlDpXF
+gEx7bLYufaHobVmchrsE+fNGRTvByeWp5sXE+YCeOJWFwL5chSRSP/M5xMFR3C8C
+k6OVT0z2h7a/8ftZMIa3L5Fuc6oQxPY3XZe0JP4jOfqhBw0I2IEffW9yEKqh6GkS
+VK1JaDFnS3KkCKXvTgNCOuZENfSC44rycrOfnPz9r3l4WQgUyOL8FdLq/oas/G97
+M2DiUQYK9GkQkjarNzIzklfPByqkNSUHr7uSV0NiWQdlrm47uxg2ILC+k9aiAl5N
+/3zR0W2pyjp9C1FqAY/VFa9m1+WNmWHHmFEgEU2mORymb9/WqUGpJ033zZqmQrwC
+PkbmYjY2zYgY2vaPHpaUa+sJb7Blph334NOUI9Z37+vaHP/4VlmH8XikRZ58kSPk
+i5npwKUwWhrA794Smq27DB1GlFYG3L2whkVuAm37tW/1G85hPynZAPLAWwARAQAB
+tD5QdWJsaWMgcmVwb3NpdG9yeSBzaWduaW5nIGtleSAybmRRdWFkcmFudCA8Y2lA
+Mm5kcXVhZHJhbnQuY29tPokCPgQTAQIAKAUCWqk1TQIbAwUJA8JnAAYLCQgHAwIG
+FQgCCQoLBBYCAwECHgECF4AACgkQmQTNS9a68MP/AhAAhSP7I5XVlQaDk0G/JSAx
+jkeeJCBTM2tBF7YmgBHqEetPg39zNGfXKsQA9nJ4+TS+GaCPWeG6gP7nH40vgbkP
+16Tz4179hv/sDmpTjqFhDucU2RJLB4mraZRTjDRSatfRsdcczP6tRCUYJbwVFvVx
+ztq46h4gSzW0N/Afl9twqO3p3hNPmbMBqAtZtX9xk0mv0mjF/fO+kneGJ3VxR1W0
+TuoBTMQRzqLdVmvqqrxhsnH9pf3c4CDLRtz/FPRBWcTryb/JSf2xA/D+gE4dqTRv
+tmY4jyAx5tRe5J0TWy7ghGeQiowTgpVJZ9qLp0vZcX+G2hMn1T7g6ftV/shIp5+Z
+PmzGZqw+Dx5V1Npcm0KGmc0/QGN/1MPRiq4YQk1CQWIEc5N3s6FkwTsWmEdve8T4
+PTo4/XSzRBT7M3AdSBhKzl4i3IPct5ld8pP1wWk9u/fMnGnbmGERQGohvigsxqc/
+KMi29dG8iGP5gJNEbEvNyD4LtfeQYhB3vI/RI5CRrBCKnqdZlJemPiS08w8zJrny
+WogrXlkE4pGu22Ryh+jI4jtusBktPU8Kxx1bKtDkr9EAqYazWSu9Ha/w79loFpfN
+RYH5/+4dehDUjcrluUcN7hshJijqlkgUctjLYOdleJHKAgSX06+6oeu74SH/i+z6
+6SUYZxf80izYErwrFxhxlx8=
+=V6ND
+-----END PGP PUBLIC KEY BLOCK-----"
+
+# postgres vars
+postgres_data_directory: '/var/lib/pgsql/12/data'
+postgres_conf_directory: '/etc/postgresql/12/data'
+
+# repmgr vars
+repmgr_conf_file: "repmgr.conf"
+repmgr_conf_dir: "/etc/repmgr/12"
+repmgr_user: "repmgr"
+repmgr_dbname: "repmgr"
+
+# Repmgr config options
+repmgr_conninfo: "host=127.0.0.1 user={{repmgr_postgres_user}} dbname={{ repmgr_dbname }}"
+repmgr_node_id: 1
+repmgr_failover: automatic
+repmgr_loglevel: INFO
+repmgr_logfacility: STDERR
+repmgr_pg_bindir: "/usr/pgsql-{{ postgres_release }}/bin"
+
+# Repmgr commands
+repmgr_promote_command: "/usr/pgsql-{{ postgres_release }}/bin/repmgr standby promote -f /etc/repmgr/9.6/repmgr.conf --log-to-file"
+repmgr_follow_command: "/usr/pgsql-{{ postgres_release }}/bin/repmgr standby follow -f /etc/repmgr/9.6/repmgr.conf --log-to-file"
+
+
+repmgr_is_master: false

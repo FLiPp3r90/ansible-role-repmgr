@@ -1,0 +1,23 @@
+# {{ansible_managed}}
+###########################################################
+# Replication Manager configuration file for Repmgr 5.x
+###########################################################
+
+node_id={{repmgr_node_id}}       
+node_name={{ ansible_hostname }}
+
+conninfo='{{ repmgr_conninfo }}'
+
+data_directory='{{postgres_data_directory}}'
+
+config_directory='{{postgres_conf_directory}}' 
+
+log_level='{{repmgr_loglevel}}'
+log_facility='{{repmgr_logfacility}}'
+
+pg_bindir='{{repmgr_pg_bindir}}'
+
+failover='{{repmgr_failover}}'
+
+promote_command='{{ repmgr_promote_command }}'
+follow_command='{{ repmgr_follow_command }}'
