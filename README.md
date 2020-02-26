@@ -27,7 +27,7 @@ In the playbook for the master:
 ```yaml
 - host: servers
   roles:
-  - role: repmgr
+  - role: ansible-repmgr
     repmgr_is_master: yes
     repmgr_node_id: 1
 ```
@@ -37,7 +37,7 @@ In the playbook for the standby:
 ```yml
 - hosts: servers
   roles:
-  - role: repmgr
+  - role: ansible-repmgr
     repmgr_node_id: 2
 ```
 
