@@ -10,5 +10,3 @@
     src: repmgr.conf.j2
     dest: "{{ repmgr_conf_dir }}/{{ repmgr_conf_file }}"
   register: repmgr_conf
-  notify: restart repmgrd
-
