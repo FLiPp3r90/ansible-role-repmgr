@@ -28,22 +28,17 @@ In the playbook for the master:
 ```yaml
 - hosts: db
   roles:
-<<<<<<< HEAD
-    - repmgr
+    - ansible-repmgr
   vars:
     repmgr_install_only: True
 
 - hosts: db
   roles:
-     - role: postgresql
-     - role: repmgr
+     - role: anxs/postgresql
+     - role: ansible-repmgr
   vars:
-=======
-  - role: ansible-repmgr
-    repmgr_is_master: yes
->>>>>>> master
-    repmgr_node_id: 1
     repmgr_is_master: True
+    repmgr_node_id: 1
 ```
 
 In the playbook for the slave:
@@ -51,19 +46,15 @@ In the playbook for the slave:
 ```yaml
 - hosts: db
   roles:
-    - repmgr
+    - ansible-repmgr
   vars:
     repmgr_install_only: True
 
 - hosts: db
   roles:
-<<<<<<< HEAD
-     - role: postgresql
-     - role: repmgr
+     - role: anxs/postgresql
+     - role: ansible-repmgr
   vars:
-=======
-  - role: ansible-repmgr
->>>>>>> master
     repmgr_node_id: 2
     repmgr_clone_standby: True
     repmgr_register_standby: True
