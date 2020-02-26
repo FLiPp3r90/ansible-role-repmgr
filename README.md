@@ -7,6 +7,7 @@ Requirements
 ------------
 
 Assumes PostgreSQL is already installed and running.
+But before you can deploy the whole role, you need to install repmgr first because you need the repmgr binaries when before starting the Postgresql database with repmgr shared preload libraries. 
 
 Role Variables
 --------------
@@ -17,7 +18,7 @@ Dependencies
 ------------
 * Repmgr 5.x
 * Postgres >= 9.6
-* Role ANXS/postgresql
+* Ansible ANXS/postgresql
 
 Usage
 -----
@@ -25,21 +26,40 @@ Usage
 In the playbook for the master:
 
 ```yaml
-- host: servers
+- hosts: db
   roles:
-  - role: repmgr
-    repmgr_is_master: yes
+    - repmgr
+  vars:
+    repmgr_install_only: True
+
+- hosts: db
+  roles:
+     - role: postgresql
+     - role: repmgr
+  vars:
     repmgr_node_id: 1
+    repmgr_is_master: True
 ```
 
-In the playbook for the standby:
+In the playbook for the slave:
 
-```yml
-- hosts: servers
+```yaml
+- hosts: db
   roles:
-  - role: repmgr
+    - repmgr
+  vars:
+    repmgr_install_only: True
+
+- hosts: db
+  roles:
+     - role: postgresql
+     - role: repmgr
+  vars:
     repmgr_node_id: 2
+    repmgr_clone_standby: True
+    repmgr_register_standby: True
 ```
+
 
 ### Tricks and Tips
 
@@ -59,6 +79,11 @@ appropriate permissions.  This two things.
   host  replication  postgres  10.0.0.0/8      trust
 
   ```
+
+If you use Firewalld on your database hosts you have to ensure that the Postgresql port is open.
+
+If you have stricted sshd access configured on your database hosts you have to ensure that the postgres os user is able to connect via ssh key to all cluster member.
+
 
 License
 -------
