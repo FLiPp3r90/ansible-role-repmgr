@@ -1,4 +1,4 @@
-repmgr
+ansible-repmgr
 ======
 
 This role installs and configures repmgr for Postgresql replication
@@ -28,6 +28,7 @@ In the playbook for the master:
 ```yaml
 - hosts: db
   roles:
+<<<<<<< HEAD
     - repmgr
   vars:
     repmgr_install_only: True
@@ -37,6 +38,10 @@ In the playbook for the master:
      - role: postgresql
      - role: repmgr
   vars:
+=======
+  - role: ansible-repmgr
+    repmgr_is_master: yes
+>>>>>>> master
     repmgr_node_id: 1
     repmgr_is_master: True
 ```
@@ -52,9 +57,13 @@ In the playbook for the slave:
 
 - hosts: db
   roles:
+<<<<<<< HEAD
      - role: postgresql
      - role: repmgr
   vars:
+=======
+  - role: ansible-repmgr
+>>>>>>> master
     repmgr_node_id: 2
     repmgr_clone_standby: True
     repmgr_register_standby: True
