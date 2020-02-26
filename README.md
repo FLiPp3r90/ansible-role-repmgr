@@ -1,4 +1,4 @@
-repmgr
+ansible-repmgr
 ======
 
 This role installs and configures repmgr for Postgresql replication
