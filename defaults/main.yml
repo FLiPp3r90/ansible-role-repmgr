@@ -1,22 +1,33 @@
 ---
-# version
+# versions
 postgres_release: 12
 repmgr_release: 5
+
+# packages
+
 repmgr_package: "repmgr{{ postgres_release }}"
 postgres_package: "postgresql{{ postgres_release }}"
+
+# services
 repmgr_service: "repmgr{{postgres_release}}"
 postgres_service: "postgresql-{{postgres_release}}"
+
+# postgres vars
 repmgr_postgres_admin_user: 'postgres'
 repmgr_postgres_admin_user_group: 'postgres'
 postgres_ssh_dir: '/var/lib/pgsql/.ssh'
 postgres_ssh_rsa_key: "{{ postgres_ssh_dir }}/id_rsa"
 
+# postgres vars
+postgres_data_directory: "/var/lib/pgsql/{{ postgres_release }}/data"
+postgres_conf_directory: "/etc/postgresql/{{ postgres_release }}/data"
+
 # repository
 repmgr_install_repository: True
 repmgr_install_gpg_key: True
 repmgr_repository: "https://dl.2ndquadrant.com/default/release/browse/rpm/packages/rhel/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/{{ postgres_release }}"
-repmgr_gpg_file: /etc/pki/rpm-gpg/RPM-GPG-KEY-2NDQ-DL-DEFAULT
-repmgr_gpg_key: "-----BEGIN PGP PUBLIC KEY BLOCK-----
+repmgr_gpg_file: '/etc/pki/rpm-gpg/RPM-GPG-KEY-2NDQ-DL-DEFAULT'
+repmgr_gpg_key: '-----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: GnuPG v1
 
 mQINBFqpNU0BEAC6tFZf3Vt5FB4sG0pDeomVypnxTudww/bFm4ZWg3NsP4tnhaao
@@ -45,33 +56,31 @@ WogrXlkE4pGu22Ryh+jI4jtusBktPU8Kxx1bKtDkr9EAqYazWSu9Ha/w79loFpfN
 RYH5/+4dehDUjcrluUcN7hshJijqlkgUctjLYOdleJHKAgSX06+6oeu74SH/i+z6
 6SUYZxf80izYErwrFxhxlx8=
 =V6ND
------END PGP PUBLIC KEY BLOCK-----"
+-----END PGP PUBLIC KEY BLOCK-----'
 
-# postgres vars
-postgres_data_directory: '/var/lib/pgsql/12/data'
-postgres_conf_directory: '/etc/postgresql/12/data'
 
 # repmgr vars
-repmgr_conf_file: "repmgr.conf"
-repmgr_conf_dir: "/etc/repmgr/12"
-repmgr_user: "repmgr"
-repmgr_dbname: "repmgr"
+repmgr_conf_file: 'repmgr.conf'
+repmgr_conf_dir: '/etc/repmgr/{{ postgres_release }}'
+repmgr_user: 'repmgr'
+repmgr_dbname: 'repmgr'
 
-# Repmgr config options
+# repmgr config options
 repmgr_conninfo: "host=127.0.0.1 user={{repmgr_postgres_user}} dbname={{ repmgr_dbname }}"
 repmgr_node_id: 1
-repmgr_failover: automatic
-repmgr_loglevel: INFO
-repmgr_logfacility: STDERR
+repmgr_failover: 'automatic'
+repmgr_loglevel: 'INFO'
+repmgr_logfacility: 'STDERR'
 repmgr_pg_bindir: "/usr/pgsql-{{ postgres_release }}/bin"
 
-# Repmgr commands
+# repmgr commands
 repmgr_promote_command: "/usr/pgsql-{{ postgres_release }}/bin/repmgr standby promote -f /etc/repmgr/9.6/repmgr.conf --log-to-file"
 repmgr_follow_command: "/usr/pgsql-{{ postgres_release }}/bin/repmgr standby follow -f /etc/repmgr/9.6/repmgr.conf --log-to-file"
 
-
-repmgr_is_master: false
+# role management
+repmgr_is_master: False
 repmgr_register_master: True
 repmgr_register_standby: False
 repmgr_clone_standby: False
 repmgr_bootstrap: True
+repmgr_install_only: False
