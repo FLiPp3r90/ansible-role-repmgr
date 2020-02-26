@@ -1,0 +1,14 @@
+---
+- name: repmgr | create repmgr conf dir
+  file:
+    path: "{{ repmgr_conf_dir }}"
+    state: directory
+    recurse: yes
+
+- name: repmgr | create repmgr conf
+  template:
+    src: repmgr.conf.j2
+    dest: "{{ repmgr_conf_dir }}/{{ repmgr_conf_file }}"
+  register: repmgr_conf
+  notify: restart repmgrd
+

@@ -71,3 +71,7 @@ repmgr_follow_command: "/usr/pgsql-{{ postgres_release }}/bin/repmgr standby fol
 
 
 repmgr_is_master: false
+repmgr_register_master: True
+repmgr_register_standby: False
+repmgr_clone_standby: False
+repmgr_bootstrap: True

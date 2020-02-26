@@ -1,0 +1,9 @@
+---
+- name: repmgr | register standby node
+  shell: "/usr/pgsql-{{ postgres_release}}/bin/repmgr -f {{ repmgr_conf_dir }}/{{ repmgr_conf_file }} standby register"
+  when:
+    - not repmgr_is_master|bool
+    - result is failed
+  become: yes
+  become_user: "{{ repmgr_postgres_admin_user }}"
+
