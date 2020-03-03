@@ -27,7 +27,7 @@
 
 - name: repmgr | merge public keys
   assemble:
-    src: /tmp/ansible_buffer
+    src: /tmp/repmgr_buffer
     dest: /tmp/postgres_authorized_keys
   delegate_to: localhost
   run_once: True
@@ -44,4 +44,3 @@
     group: "{{ repmgr_postgres_admin_user_group }}"
     recurse: True
     state: directory
-
