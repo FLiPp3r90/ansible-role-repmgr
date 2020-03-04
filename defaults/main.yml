@@ -71,6 +71,7 @@ repmgr_node_id: 1
 repmgr_failover: 'automatic'
 repmgr_loglevel: 'INFO'
 repmgr_logfacility: 'STDERR'
+repmgr_log_file: '/var/log/repmgr/repmgr.log'
 repmgr_pg_bindir: "/usr/pgsql-{{ postgres_release }}/bin"
 
 # repmgr commands
