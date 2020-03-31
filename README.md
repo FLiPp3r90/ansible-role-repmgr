@@ -1,4 +1,4 @@
-ansible-repmgr [![Build Status](https://travis-ci.org/FLiPp3r90/ansible-repmgr.svg?branch=master)](https://travis-ci.org/FLiPp3r90/ansible-repmgr)
+ansible-repmgr [![Build Status](https://travis-ci.org/FLiPp3r90/ansible-repmgr.svg?branch=master)](https://travis-ci.org/github/FLiPp3r90/ansible-repmgr)
 ======
 
 This role installs and configures repmgr for Postgresql replication
