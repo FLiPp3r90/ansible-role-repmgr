@@ -22,4 +22,3 @@
   yum:
     name: "{{ repmgr_package }}"
     state: present
-

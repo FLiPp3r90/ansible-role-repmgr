@@ -1,4 +1,5 @@
 ---
+
 - name: restart repmgrd
   service:
     name: "{{ repmgr_service }}"
@@ -28,4 +29,3 @@
   service:
     name: "{{ postgres_service }}"
     state: started
-
