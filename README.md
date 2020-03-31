@@ -1,4 +1,4 @@
-ansible-repmgr
+ansible-repmgr [![Build Status](https://travis-ci.org/FLiPp3r90/ansible-repmgr.svg?branch=master)](https://travis-ci.org/FLiPp3r90/ansible-repmgr)
 ======
 
 This role installs and configures repmgr for Postgresql replication
@@ -7,7 +7,7 @@ Requirements
 ------------
 
 Assumes PostgreSQL is already installed and running.
-But before you can deploy the whole role, you need to install repmgr first because you need the repmgr binaries when before starting the Postgresql database with repmgr shared preload libraries. 
+But before you can deploy the whole role, you need to install repmgr first because you need the repmgr binaries when before starting the Postgresql database with repmgr shared preload libraries.
 
 Role Variables
 --------------
@@ -93,4 +93,4 @@ Apache-2.0
 Author Information
 ------------------
 
-Filip Krahl
+[Filip Krahl](https://github.com/FLiPp3r90)
