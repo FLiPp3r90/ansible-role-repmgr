@@ -1,4 +1,12 @@
 ---
+- name: repmgr | ensure repmgr pid file directory
+  file:
+    path: /run/repmgr/
+    mode: 0770
+    owner: "{{ repmgr_postgres_admin_user }}"
+    group: "{{ repmgr_postgres_admin_user_group }}"
+    state: directory
+
 - name: repmgr | create repmgr conf dir
   file:
     path: "{{ repmgr_conf_dir }}"

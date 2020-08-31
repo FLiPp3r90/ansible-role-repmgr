@@ -7,3 +7,9 @@
     - repmgr_is_master|bool
     - result is failed
   notify: start repmgrd
+
+- name: repmgr | ensure repmgrd is started
+  service:
+    name: "{{ repmgr_service }}"
+    state: started
+    enabled: True

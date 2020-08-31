@@ -22,3 +22,4 @@
   when:
     - not repmgr_is_master|bool
     - result is failed
+

@@ -1,4 +1,4 @@
-ansible-repmgr [![Build Status](https://travis-ci.org/FLiPp3r90/ansible-repmgr.svg?branch=master)](https://travis-ci.org/github/FLiPp3r90/ansible-repmgr)
+ansible-repmgr
 ======
 
 This role installs and configures repmgr for Postgresql replication
@@ -84,6 +84,8 @@ If you use Firewalld on your database hosts you have to ensure that the Postgres
 
 If you have stricted sshd access configured on your database hosts you have to ensure that the postgres os user is able to connect via ssh key to all cluster member.
 
+You have to set sudo rules that grants postgresql user to start/stop/restart postgresql database. 
+
 
 License
 -------
@@ -93,4 +95,4 @@ Apache-2.0
 Author Information
 ------------------
 
-[Filip Krahl](https://github.com/FLiPp3r90)
+Filip Krahl

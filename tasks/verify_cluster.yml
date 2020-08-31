@@ -8,3 +8,4 @@
   ignore_errors: true
   become: yes
   become_user: "{{ repmgr_postgres_admin_user }}"
+

@@ -7,3 +7,4 @@
   become: yes
   become_user: "{{ repmgr_postgres_admin_user }}"
   notify: start repmgrd
+

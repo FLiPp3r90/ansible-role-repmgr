@@ -1,12 +1,12 @@
 ---
 galaxy_info:
   author: Filip Krahl
-  description: "Setup PostgreSQL cluster with repmgr"
+  description:
   company: T-Systems Multimedia Solutions GmbH
   license: Apache-2.0
   min_ansible_version: 2.9
   platforms:
-  - name: EL
+  - name: EPEL
     versions:
     - 7
   categories:

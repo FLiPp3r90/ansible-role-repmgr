@@ -77,6 +77,10 @@ repmgr_pg_bindir: "/usr/pgsql-{{ postgres_release }}/bin"
 # repmgr commands
 repmgr_promote_command: "/usr/pgsql-{{ postgres_release }}/bin/repmgr standby promote -f /etc/repmgr/9.6/repmgr.conf --log-to-file"
 repmgr_follow_command: "/usr/pgsql-{{ postgres_release }}/bin/repmgr standby follow -f /etc/repmgr/9.6/repmgr.conf --log-to-file"
+repmgr_start_command: "/usr/bin/sudo /usr/bin/systemctl start postgresql-{{ postgres_release }}.service"
+repmgr_stop_command: "/usr/bin/sudo /usr/bin/systemctl stop postgresql-{{ postgres_release }}.service"
+repmgr_restart_command: "/usr/bin/sudo /usr/bin/systemctl restart postgresql-{{ postgres_release }}.service"
+
 
 # role management
 repmgr_is_master: False
