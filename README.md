@@ -1,4 +1,4 @@
-ansible-repmgr
+ansible-role-repmgr
 ======
 
 This role installs and configures repmgr for Postgresql replication
@@ -16,9 +16,7 @@ See defaults/main.yml
 
 Dependencies
 ------------
-* Repmgr 5.x
-* Postgres >= 9.6
-* Ansible ANXS/postgresql
+* PostgreSQL installation
 
 Usage
 -----
@@ -28,14 +26,14 @@ In the playbook for the master:
 ```yaml
 - hosts: db
   roles:
-    - ansible-repmgr
+    - FLiPp3r90/repmgr
   vars:
     repmgr_install_only: True
 
 - hosts: db
   roles:
      - role: anxs/postgresql
-     - role: ansible-repmgr
+     - role: FLiPp3r90/repmgr
   vars:
     repmgr_is_master: True
     repmgr_node_id: 1
@@ -46,14 +44,14 @@ In the playbook for the slave:
 ```yaml
 - hosts: db
   roles:
-    - ansible-repmgr
+    - FLiPp3r90/repmgr
   vars:
     repmgr_install_only: True
 
 - hosts: db
   roles:
      - role: anxs/postgresql
-     - role: ansible-repmgr
+     - role: FLiPp3r90/repmgr
   vars:
     repmgr_node_id: 2
     repmgr_clone_standby: True
@@ -95,4 +93,4 @@ MIT
 Author Information
 ------------------
 
-FLiPp3r90
+[FLiPp3r90](https://github.com/FLiPp3r90)
