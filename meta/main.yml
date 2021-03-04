@@ -2,7 +2,7 @@
 dependencies: []
 
 galaxy_info:
-  role_name: ansible-repmgr
+  role_name: repmgr
   author: FLiPp3r90
   description: Replication manager for PostgreSQL
   company: "T-Systems MMS"

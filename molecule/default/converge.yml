@@ -4,4 +4,4 @@
   become: true
 
   roles:
-    - role: FLiPp3r90.ansible-repmgr
+    - role: FLiPp3r90.repmgr
