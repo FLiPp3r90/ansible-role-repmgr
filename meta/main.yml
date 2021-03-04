@@ -1,9 +1,10 @@
 ---
 ---
-dependencies: []
+dependencies:
+  - role: ANXS.postgresql
 
 galaxy_info:
-  role_name: repmgr
+  role_name: ansible-repmgr
   author: FLiPp3r90
   description: Replication manager for PostgreSQL
   company: "T-Systems MMS"
