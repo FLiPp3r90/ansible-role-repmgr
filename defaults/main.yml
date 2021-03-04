@@ -3,6 +3,11 @@
 postgres_release: 12
 repmgr_release: 5
 
+# os user
+postgres_user: postgres
+postgres_group: postgres
+
+
 # packages
 
 repmgr_package: "repmgr{{ postgres_release }}"

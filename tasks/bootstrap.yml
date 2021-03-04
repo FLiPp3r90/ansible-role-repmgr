@@ -3,6 +3,9 @@
   file:
     path: "{{ postgres_ssh_dir }}"
     state: directory
+    owner: "{{ postgres_user }}"
+    group: "{{ postgres_group }}"
+    mode: '0750'
   become: true
   become_user: "{{ repmgr_postgres_admin_user }}"
 
@@ -16,6 +19,9 @@
   file:
     path: /tmp/repmgr_buffer/
     state: directory
+    owner: root
+    group: root
+    mode: '0750'
   delegate_to: localhost
   run_once: true
 
@@ -29,6 +35,9 @@
   assemble:
     src: /tmp/repmgr_buffer
     dest: /tmp/postgres_authorized_keys
+    owner: root
+    group: root
+    mode: '0750'
   delegate_to: localhost
   run_once: true
 
@@ -36,11 +45,15 @@
   copy:
     src: '/tmp/postgres_authorized_keys'
     dest: "{{ postgres_ssh_dir }}/authorized_keys"
+    owner: "{{ postgres_user }}"
+    group: "{{ postgres_group }}"
+    mode: '0750'
 
 - name: repmgr | set .ssh directory privileges
   file:
     path: "{{ postgres_ssh_dir }}"
-    owner: "{{ repmgr_postgres_admin_user }}"
-    group: "{{ repmgr_postgres_admin_user_group }}"
+    owner: "{{ postgres_user }}"
+    group: "{{ postgres_group }}"
+    mode: '0750'
     recurse: true
     state: directory

@@ -1,6 +1,6 @@
 ---
 - name: repmgr | verify node status
-  shell: "/usr/pgsql-{{ postgres_release}}/bin/repmgr -f {{ repmgr_conf_dir }}/{{ repmgr_conf_file }} node check"
+  command: "/usr/pgsql-{{ postgres_release }}/bin/repmgr -f {{ repmgr_conf_dir }}/{{ repmgr_conf_file }} node check"
   args:
     warn: false
   changed_when: false

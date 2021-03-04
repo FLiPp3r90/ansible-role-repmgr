@@ -3,6 +3,9 @@
   copy:
     dest: "{{ repmgr_gpg_file }}"
     content: "{{ repmgr_gpg_key }}"
+    owner: "root"
+    group: "root"
+    mode: '0740'
   when: repmgr_install_gpg_key
 
 - name: repmgr | install repmgr yum repository
