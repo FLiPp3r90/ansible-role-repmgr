@@ -19,6 +19,8 @@
           name: "{{ postgresql_packages }}"
           state: present
           enablerepo: true  
+      when: 
+        - ( ansible_os_family == 'RedHat' and ansible_distribution_major_version == '7')
 
   roles:
     - role: FLiPp3r90.repmgr
