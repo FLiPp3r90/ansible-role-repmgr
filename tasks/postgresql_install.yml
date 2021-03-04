@@ -1,0 +1,22 @@
+---
+- name: psql | install psql gpg key
+  copy:
+    dest: "{{ repmgr_psql_gpg_file }}"
+    content: "{{ repmgr_psql_gpg_key }}"
+    owner: "root"
+    group: "root"
+    mode: '0740'
+  when: repmgr_install_psql_gpg_key
+
+- name: psql | install psql yum repository
+  yum_repository:
+    name: "postgresql-{{ postgres_release }}"
+    description: PostgreSQL repository
+    baseurl: "{{ repmgr_psql_repository }}"
+    gpgkey: "file:///{{ repmgr_psql_gpg_file }}"
+  when: repmgr_install_psql_repository
+
+- name: repmgr | install postgresql
+  yum:
+    name: "{{ postgresql_server_package }}"
+    state: present
