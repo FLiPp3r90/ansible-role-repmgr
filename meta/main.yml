@@ -1,15 +1,22 @@
 ---
+---
+dependencies: []
+
 galaxy_info:
-  author: Filip Krahl
-  description:
-  company: T-Systems Multimedia Solutions GmbH
-  license: Apache-2.0
+  role_name: repmgr
+  author: FLiPp3r90
+  description: Replication manager for PostgreSQL
+  company: "T-Systems MMS"
+  license: MIT
   min_ansible_version: 2.9
   platforms:
-  - name: EPEL
-    versions:
-    - 7
-  categories:
-  - database
-  - database:sql
-dependencies: []
+    - name: EL
+      versions:
+        - 7
+  galaxy_tags:
+    - database
+    - postgresql
+    - postgres
+    - rdbms
+    - repmgr
+    - cluster
