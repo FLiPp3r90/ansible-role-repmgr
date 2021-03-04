@@ -6,4 +6,4 @@
   roles:
     - role: FLiPp3r90.repmgr
       vars:
-        repmgr_install_only: True
+        repmgr_install_only: true
