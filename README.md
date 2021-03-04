@@ -90,9 +90,9 @@ You have to set sudo rules that grants postgresql user to start/stop/restart pos
 License
 -------
 
-Apache-2.0
+MIT
 
 Author Information
 ------------------
 
-Filip Krahl
+FLiPp3r90
