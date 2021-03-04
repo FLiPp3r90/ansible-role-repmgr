@@ -16,6 +16,11 @@
     gpgkey: "file:///{{ repmgr_gpg_file }}"
   when: repmgr_install_repository
 
+- name: repmgr | install postgresql
+  yum:
+    name: "{{ postgresql_server_package }}"
+    state: present
+
 - name: repmgr | install repmgr
   yum:
     name: "{{ repmgr_package }}"

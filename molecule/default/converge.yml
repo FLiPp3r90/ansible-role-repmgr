@@ -3,24 +3,6 @@
   hosts: all
   become: true
 
-  pre_tasks:
-    - name: Set postgresql packages
-      set_fact:
-        postgresql_packages:
-          - postgresql
-          - postgresql-server
-          - postgresql-contrib
-          - postgresql-libs
-      when:
-        - ( ansible_os_family == 'RedHat' and ansible_distribution_major_version == '7')
-
-    - name: Install PostgreSQL server packages
-      yum:
-        name: "{{ postgresql_packages }}"
-        state: present
-      when:
-        - ( ansible_os_family == 'RedHat' and ansible_distribution_major_version == '7')
-
   roles:
     - role: FLiPp3r90.repmgr
       vars:

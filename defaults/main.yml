@@ -1,7 +1,6 @@
 ---
 # versions
 postgres_release: 12
-repmgr_release: 5
 
 # os user
 postgres_user: postgres
@@ -9,9 +8,8 @@ postgres_group: postgres
 
 
 # packages
-
 repmgr_package: "repmgr{{ postgres_release }}"
-postgres_package: "postgresql{{ postgres_release }}"
+postgresql_server_package: "postgresql-{{ postgres_release }}-server"
 
 # services
 repmgr_service: "repmgr{{postgres_release}}"
@@ -89,8 +87,8 @@ repmgr_restart_command: "/usr/bin/sudo /usr/bin/systemctl restart postgresql-{{ 
 
 # role management
 repmgr_is_master: false
-repmgr_register_master: true
+repmgr_register_master: false
 repmgr_register_standby: false
 repmgr_clone_standby: false
-repmgr_bootstrap: true
-repmgr_install_only: false
+repmgr_bootstrap: false
+repmgr_install_only: true
