@@ -4,5 +4,6 @@
   become: true
 
   roles:
-    - role: ANXS.postgresql
+    - role: geerlingguy.postgresql
+      become: true
     - role: FLiPp3r90.repmgr
