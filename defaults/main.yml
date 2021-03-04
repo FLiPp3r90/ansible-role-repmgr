@@ -9,7 +9,7 @@ postgres_group: postgres
 
 # packages
 repmgr_package: "repmgr{{ postgres_release }}"
-postgresql_server_package: "postgresql-{{ postgres_release }}-server"
+postgresql_server_package: "postgresql{{ postgres_release }}-server"
 
 # services
 repmgr_service: "repmgr{{postgres_release}}"
