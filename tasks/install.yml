@@ -7,10 +7,10 @@
 
 - name: repmgr | install repmgr yum repository
   yum_repository:
-     name: "repmgr_{{ postgres_release }}"
-     description: 2ndquadrant yum repo
-     baseurl: "{{ repmgr_repository }}"
-     gpgkey: "file:///{{ repmgr_gpg_file }}"
+    name: "repmgr_{{ postgres_release }}"
+    description: 2ndquadrant yum repo
+    baseurl: "{{ repmgr_repository }}"
+    gpgkey: "file:///{{ repmgr_gpg_file }}"
   when: repmgr_install_repository
 
 - name: repmgr | ensure postgresql is installed
@@ -22,4 +22,3 @@
   yum:
     name: "{{ repmgr_package }}"
     state: present
-

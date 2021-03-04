@@ -6,6 +6,5 @@
   changed_when: false
   register: result
   ignore_errors: true
-  become: yes
+  become: true
   become_user: "{{ repmgr_postgres_admin_user }}"
-

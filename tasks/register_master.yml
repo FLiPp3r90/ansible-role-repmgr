@@ -1,7 +1,7 @@
 ---
 - name: repmgr | register master node
   shell: "/usr/pgsql-{{ postgres_release}}/bin/repmgr -f {{ repmgr_conf_dir }}/{{ repmgr_conf_file }} primary register"
-  become: yes
+  become: true
   become_user: "{{ repmgr_postgres_admin_user }}"
   when:
     - repmgr_is_master|bool
@@ -12,4 +12,4 @@
   service:
     name: "{{ repmgr_service }}"
     state: started
-    enabled: True
+    enabled: true

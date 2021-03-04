@@ -28,4 +28,3 @@
   service:
     name: "{{ postgres_service }}"
     state: started
-

@@ -23,8 +23,8 @@ postgres_data_directory: "/var/lib/pgsql/{{ postgres_release }}/data"
 postgres_conf_directory: "/etc/postgresql/{{ postgres_release }}/data"
 
 # repository
-repmgr_install_repository: True
-repmgr_install_gpg_key: True
+repmgr_install_repository: true
+repmgr_install_gpg_key: true
 repmgr_repository: "https://dl.2ndquadrant.com/default/release/browse/rpm/packages/rhel/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/{{ postgres_release }}"
 repmgr_gpg_file: '/etc/pki/rpm-gpg/RPM-GPG-KEY-2NDQ-DL-DEFAULT'
 repmgr_gpg_key: '-----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -83,9 +83,9 @@ repmgr_restart_command: "/usr/bin/sudo /usr/bin/systemctl restart postgresql-{{ 
 
 
 # role management
-repmgr_is_master: False
-repmgr_register_master: True
-repmgr_register_standby: False
-repmgr_clone_standby: False
-repmgr_bootstrap: True
-repmgr_install_only: False
+repmgr_is_master: false
+repmgr_register_master: true
+repmgr_register_standby: false
+repmgr_clone_standby: false
+repmgr_bootstrap: true
+repmgr_install_only: false

@@ -11,7 +11,7 @@
   file:
     path: "{{ repmgr_conf_dir }}"
     state: directory
-    recurse: yes
+    recurse: true
 
 - name: repmgr | create repmgr conf
   template:

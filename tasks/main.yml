@@ -5,26 +5,26 @@
   when: not repmgr_install_only|bool
 
 - include: bootstrap.yml
-  when: 
+  when:
     - repmgr_bootstrap|bool
     - not repmgr_install_only|bool
 
 - include: verify_cluster.yml
-  when: 
+  when:
     - repmgr_register_master|bool or repmgr_register_standby|bool or repmgr_clone_master|bool
     - not repmgr_install_only|bool
 
 - include: register_master.yml
-  when: 
+  when:
     - repmgr_register_master|bool
     - not repmgr_install_only|bool
 
 - include: clone_standby.yml
-  when: 
+  when:
     - repmgr_clone_standby|bool
     - not repmgr_install_only|bool
 
 - include: register_standby.yml
-  when: 
+  when:
     - repmgr_register_standby|bool
     - not repmgr_install_only|bool
