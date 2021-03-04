@@ -1,6 +1,5 @@
 ---
-dependencies:
-  - role: geerlingguy.postgresql
+dependencies: []
 
 galaxy_info:
   role_name: repmgr

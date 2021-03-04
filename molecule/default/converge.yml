@@ -4,6 +4,6 @@
   become: true
 
   roles:
-    - role: geerlingguy.postgresql
-      become: true
     - role: FLiPp3r90.repmgr
+      vars:
+        repmgr_install_only: True

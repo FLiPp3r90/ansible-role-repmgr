@@ -16,7 +16,7 @@ See defaults/main.yml
 
 Dependencies
 ------------
-* role: geerlingguy.postgresql
+* PostgreSQL installation
 
 Usage
 -----
