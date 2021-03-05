@@ -1,4 +1,12 @@
 ---
+- name: Ensure PostgreSQL packages are installed.
+  yum:
+    name: "{{ postgresql_server_package }}"
+    state: present
+    enablerepo: "{{ postgres_repo }}"
+    exclude: python-unversioned-command
+  when: repmgr_install_postgresql|bool
+
 - name: repmgr | install repmgr gpg key
   copy:
     dest: "{{ repmgr_gpg_file }}"
