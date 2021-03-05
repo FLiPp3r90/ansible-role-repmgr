@@ -1,25 +1,38 @@
 ---
-- name: repmgr | install repmgr gpg key
-  copy:
-    dest: "{{ repmgr_gpg_file }}"
-    content: "{{ repmgr_gpg_key }}"
-  when: repmgr_install_gpg_key
+- name: Ensure Postgresql repository
+  yum_repository:
+    name: "{{ postgres_repo_name }}"
+    description: PostgreSQL repository
+    baseurl: "{{ postgres_repo }}"
+  when: repmgr_install_postgresql|bool
+
+- name: Download and install GPG key
+  rpm_key:
+    state: present
+    key: https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG
+  when: repmgr_install_postgresql|bool
+
+- name: Ensure PostgreSQL packages are installed.
+  yum:
+    name: "{{ postgresql_server_package }}"
+    state: present
+    enablerepo: "{{ postgres_repo_name }}"
+  when: repmgr_install_postgresql|bool
 
 - name: repmgr | install repmgr yum repository
   yum_repository:
-     name: "repmgr_{{ postgres_release }}"
-     description: 2ndquadrant yum repo
-     baseurl: "{{ repmgr_repository }}"
-     gpgkey: "file:///{{ repmgr_gpg_file }}"
+    name: "repmgr_{{ postgres_release }}"
+    description: 2ndquadrant yum repo
+    baseurl: "{{ repmgr_repository }}"
   when: repmgr_install_repository
 
-- name: repmgr | ensure postgresql is installed
-  yum:
-    name: "{{ postgres_package }}"
-    state: installed
+- name: Download and install GPG key
+  rpm_key:
+    state: present
+    key: https://dl.2ndquadrant.com/gpg-key.asc
+  when: repmgr_install_postgresql|bool
 
 - name: repmgr | install repmgr
   yum:
     name: "{{ repmgr_package }}"
     state: present
-

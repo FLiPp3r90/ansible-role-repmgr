@@ -3,4 +3,4 @@
   service:
     name: "{{ repmgr_service }}"
     state: started
-    enabled: True
+    enabled: true

@@ -2,19 +2,25 @@
 - name: repmgr | ensure repmgr pid file directory
   file:
     path: /run/repmgr/
-    mode: 0770
-    owner: "{{ repmgr_postgres_admin_user }}"
-    group: "{{ repmgr_postgres_admin_user_group }}"
+    owner: "{{ postgres_user }}"
+    group: "{{ postgres_group }}"
+    mode: '0740'
     state: directory
 
 - name: repmgr | create repmgr conf dir
   file:
     path: "{{ repmgr_conf_dir }}"
+    owner: "{{ postgres_user }}"
+    group: "{{ postgres_group }}"
+    mode: '0740'
     state: directory
-    recurse: yes
+    recurse: true
 
 - name: repmgr | create repmgr conf
   template:
     src: repmgr.conf.j2
     dest: "{{ repmgr_conf_dir }}/{{ repmgr_conf_file }}"
+    owner: "{{ postgres_user }}"
+    group: "{{ postgres_group }}"
+    mode: '0740'
   register: repmgr_conf

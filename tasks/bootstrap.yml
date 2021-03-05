@@ -3,44 +3,57 @@
   file:
     path: "{{ postgres_ssh_dir }}"
     state: directory
-  become: yes
+    owner: "{{ postgres_user }}"
+    group: "{{ postgres_group }}"
+    mode: '0750'
+  become: true
   become_user: "{{ repmgr_postgres_admin_user }}"
 
 - name: repmgr | create ssh rsa key for postgres user
   openssh_keypair:
     path: "{{ postgres_ssh_rsa_key }}"
-  become: yes
+  become: true
   become_user: "{{ repmgr_postgres_admin_user }}"
 
 - name: repmgr | create buffer directory
   file:
     path: /tmp/repmgr_buffer/
     state: directory
+    owner: root
+    group: root
+    mode: '0750'
   delegate_to: localhost
-  run_once: True
+  run_once: true
 
 - name: repmgr | fetch ssh public keys from nodes
   fetch:
     dest: "/tmp/repmgr_buffer/{{ ansible_hostname }}_postgres_id_rsa_key.pub"
     src: "{{ postgres_ssh_rsa_key }}.pub"
-    flat: True
+    flat: true
 
 - name: repmgr | merge public keys
   assemble:
     src: /tmp/repmgr_buffer
     dest: /tmp/postgres_authorized_keys
+    owner: root
+    group: root
+    mode: '0750'
   delegate_to: localhost
-  run_once: True
+  run_once: true
 
 - name: repmgr | copy authorized key to host
   copy:
     src: '/tmp/postgres_authorized_keys'
     dest: "{{ postgres_ssh_dir }}/authorized_keys"
+    owner: "{{ postgres_user }}"
+    group: "{{ postgres_group }}"
+    mode: '0750'
 
 - name: repmgr | set .ssh directory privileges
   file:
     path: "{{ postgres_ssh_dir }}"
-    owner: "{{ repmgr_postgres_admin_user }}"
-    group: "{{ repmgr_postgres_admin_user_group }}"
-    recurse: True
+    owner: "{{ postgres_user }}"
+    group: "{{ postgres_group }}"
+    mode: '0750'
+    recurse: true
     state: directory

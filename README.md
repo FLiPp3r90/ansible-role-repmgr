@@ -1,43 +1,38 @@
-ansible-repmgr
-======
+# Ansible Role: Repmgr
+
+[![CI](https://github.com/FLiPp3r90/ansible-role-repmgr/workflows/CI/badge.svg?event=push)](https://github.com/FLiPp3r90/ansible-role-repmgr/actions?query=workflow%3ACI)
 
 This role installs and configures repmgr for Postgresql replication
 
-Requirements
-------------
-
-Assumes PostgreSQL is already installed and running.
+## Requirements
+You need a PostgreSQL installation to use this role. 
 But before you can deploy the whole role, you need to install repmgr first because you need the repmgr binaries when before starting the Postgresql database with repmgr shared preload libraries.
 
-Role Variables
---------------
+## Role Variables
 
 See defaults/main.yml
 
-Dependencies
-------------
-* Repmgr 5.x
-* Postgres >= 9.6
-* Ansible ANXS/postgresql
+## Dependencies
 
-Usage
------
+None.
+
+## Usage
 
 In the playbook for the master:
 
 ```yaml
 - hosts: db
   roles:
-    - ansible-repmgr
+    - FLiPp3r90/repmgr
   vars:
-    repmgr_install_only: True
+    repmgr_install_only: true
 
 - hosts: db
   roles:
      - role: anxs/postgresql
-     - role: ansible-repmgr
+     - role: FLiPp3r90/repmgr
   vars:
-    repmgr_is_master: True
+    repmgr_is_master: true
     repmgr_node_id: 1
 ```
 
@@ -46,22 +41,22 @@ In the playbook for the slave:
 ```yaml
 - hosts: db
   roles:
-    - ansible-repmgr
+    - FLiPp3r90/repmgr
   vars:
-    repmgr_install_only: True
+    repmgr_install_only: true
 
 - hosts: db
   roles:
      - role: anxs/postgresql
-     - role: ansible-repmgr
+     - role: FLiPp3r90/repmgr
   vars:
     repmgr_node_id: 2
-    repmgr_clone_standby: True
-    repmgr_register_standby: True
+    repmgr_clone_standby: true
+    repmgr_register_standby: true
 ```
 
 
-### Tricks and Tips
+## Tricks and Tips
 
 You will need to create a `repmgr` user on your master database with
 appropriate permissions.  This two things.
@@ -69,7 +64,7 @@ appropriate permissions.  This two things.
 1. Create a database use `repmgr` with the permissions
    `SUPERUSER,REPLICATION,LOGIN`
 2. Add an entry to the `pg_hba.conf` file giving explicit access to the
-   replication database to both the `repmgr` and the `postgres` users
+s   replication database to both the `repmgr` and the `postgres` users
 
   ```bash
   # pg_hba.conf
@@ -87,12 +82,10 @@ If you have stricted sshd access configured on your database hosts you have to e
 You have to set sudo rules that grants postgresql user to start/stop/restart postgresql database. 
 
 
-License
--------
+## License
 
-Apache-2.0
+MIT
 
-Author Information
-------------------
+## Author Information
 
-Filip Krahl
+[FLiPp3r90](https://github.com/FLiPp3r90)

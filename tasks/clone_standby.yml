@@ -8,11 +8,12 @@
     - result is failed
 
 - name: repmgr | clone standby nodes
-  shell: "/usr/pgsql-{{ postgres_release}}/bin/repmgr -f {{ repmgr_conf_dir }}/{{ repmgr_conf_file }} -h {{ repmgr_default_master }} -U {{ repmgr_user }} -d {{ repmgr_dbname }} standby clone -F"
+  command: "/usr/pgsql-{{ postgres_release }}/bin/repmgr -f {{ repmgr_conf_dir }}/{{ repmgr_conf_file }} -h {{ repmgr_default_master }}\
+            -U {{ repmgr_user }} -d {{ repmgr_dbname }} standby clone -F"
   when:
     - not repmgr_is_master|bool
     - result is failed
-  become: yes
+  become: true
   become_user: "{{ repmgr_postgres_admin_user }}"
 
 - name: repmgr | start standby postgres
@@ -22,4 +23,3 @@
   when:
     - not repmgr_is_master|bool
     - result is failed
-
