@@ -11,7 +11,7 @@
 
 - include: verify_cluster.yml
   when:
-    - repmgr_register_master|bool or repmgr_register_standby|bool or repmgr_clone_master|bool
+    - repmgr_register_master|bool or repmgr_register_standby|bool or repmgr_clone_standby|bool
     - not repmgr_install_only|bool
 
 - include: register_master.yml
