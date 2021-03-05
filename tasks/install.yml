@@ -19,22 +19,18 @@
     enablerepo: "{{ postgres_repo_name }}"
   when: repmgr_install_postgresql|bool
 
-- name: repmgr | install repmgr gpg key
-  copy:
-    dest: "{{ repmgr_gpg_file }}"
-    content: "{{ repmgr_gpg_key }}"
-    owner: "root"
-    group: "root"
-    mode: '0740'
-  when: repmgr_install_gpg_key
-
 - name: repmgr | install repmgr yum repository
   yum_repository:
     name: "repmgr_{{ postgres_release }}"
     description: 2ndquadrant yum repo
     baseurl: "{{ repmgr_repository }}"
-    gpgkey: "file:///{{ repmgr_gpg_file }}"
   when: repmgr_install_repository
+
+- name: Download and install GPG key
+  rpm_key:
+    state: present
+    key: https://dl.2ndquadrant.com/gpg-key.asc
+  when: repmgr_install_postgresql|bool
 
 - name: repmgr | install repmgr
   yum:
