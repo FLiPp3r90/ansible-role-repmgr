@@ -8,7 +8,7 @@
     - result is failed
 
 - name: repmgr | clone standby nodes
-  command: "/usr/pgsql-{{ postgres_release }}/bin/repmgr -f {{ repmgr_conf_dir }}/{{ repmgr_conf_file }} -h {{ repmgr_default_master }}\ 
+  command: "/usr/pgsql-{{ postgres_release }}/bin/repmgr -f {{ repmgr_conf_dir }}/{{ repmgr_conf_file }} -h {{ repmgr_default_master }}\
             -U {{ repmgr_user }} -d {{ repmgr_dbname }} standby clone -F"
   when:
     - not repmgr_is_master|bool
