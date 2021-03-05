@@ -1,7 +1,4 @@
 ---
-- include: postgresql_install.yml
-  when: repmgr_install_postgresql|bool
-
 - include: install.yml
 
 - include: configure.yml
