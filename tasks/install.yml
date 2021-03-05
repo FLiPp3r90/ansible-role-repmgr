@@ -1,10 +1,16 @@
 ---
+- name:
+  yum_repository:
+    name: "{{ postgres_repo_name }}"
+    description: PostgreSQL repository
+    baseurl: "{{ postgres_repo }}"
+  when: repmgr_install_postgresql|bool
+
 - name: Ensure PostgreSQL packages are installed.
   yum:
     name: "{{ postgresql_server_package }}"
     state: present
-    enablerepo: "{{ postgres_repo }}"
-    exclude: python-unversioned-command
+    enablerepo: "{{ postgres_repo_name }}"
   when: repmgr_install_postgresql|bool
 
 - name: repmgr | install repmgr gpg key

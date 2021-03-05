@@ -62,6 +62,7 @@ RYH5/+4dehDUjcrluUcN7hshJijqlkgUctjLYOdleJHKAgSX06+6oeu74SH/i+z6
 -----END PGP PUBLIC KEY BLOCK-----'
 
 # postgresql repository
+postgres_repo_name: "postgres_{{ postgres_release }}"
 postgres_repo: "https://download.postgresql.org/pub/repos/yum/{{ postgres_release }}/redhat/rhel-{{ ansible_distribution_major_version }}-{{ ansible_architecture }}"
 
 # repmgr vars
