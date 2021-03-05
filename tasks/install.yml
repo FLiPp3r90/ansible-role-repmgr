@@ -1,9 +1,15 @@
 ---
-- name:
+- name: Ensure Postgresql repository
   yum_repository:
     name: "{{ postgres_repo_name }}"
     description: PostgreSQL repository
     baseurl: "{{ postgres_repo }}"
+  when: repmgr_install_postgresql|bool
+
+- name: Download and install GPG key
+  rpm_key:
+    state: present
+    key: https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG
   when: repmgr_install_postgresql|bool
 
 - name: Ensure PostgreSQL packages are installed.
