@@ -84,7 +84,7 @@ You have to set sudo rules that grants postgresql user to start/stop/restart pos
 
 ## License
 
-MIT
+Apache License 2.0
 
 ## Author Information
 
