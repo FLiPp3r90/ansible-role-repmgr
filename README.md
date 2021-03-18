@@ -1,6 +1,7 @@
 # Ansible Role: Repmgr
 
 [![CI](https://github.com/FLiPp3r90/ansible-role-repmgr/workflows/CI/badge.svg?event=push)](https://github.com/FLiPp3r90/ansible-role-repmgr/actions?query=workflow%3ACI)
+[![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-flipp3r90.repmgr-blue.svg)](https://galaxy.ansible.com/flipp3r90/repmgr/)
 
 This role installs and configures repmgr for Postgresql replication
 
