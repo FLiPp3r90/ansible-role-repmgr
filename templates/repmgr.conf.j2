@@ -19,7 +19,7 @@ conninfo='{{ repmgr_conninfo }}'
 #
 data_directory='{{postgres_data_directory}}'
 config_directory='{{postgres_conf_directory}}'
-pg_bindir='{{repmgr_pg_bindir}}'
+pg_bindir='{{repmgr_bin_dir}}'
 log_file='{{ repmgr_log_file }}'
 
 #
@@ -37,3 +37,4 @@ follow_command='{{ repmgr_follow_command }}'
 service_start_command='{{ repmgr_start_command }}'
 service_stop_command='{{ repmgr_stop_command }}'
 service_restart_command='{{ repmgr_restart_command }}'
+passfile='/var/lib/postgresql/.pgpass'
