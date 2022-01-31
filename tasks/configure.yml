@@ -15,6 +15,7 @@
     mode: '0740'
     state: directory
     recurse: true
+  when: ansible_os_family != Debian
 
 - name: repmgr | create repmgr conf
   template:

@@ -14,5 +14,6 @@ repmgr_repository: "https://dl.2ndquadrant.com/default/release/browse/rpm/packag
 postgres_repo_name: "postgres_{{ postgres_release }}"
 postgres_repo: "https://download.postgresql.org/pub/repos/yum/{{ postgres_release }}/redhat/rhel-{{ ansible_distribution_major_version }}-{{ ansible_architecture }}"
 
-# repmgr binary directory
+# repmgr directories
 repmgr_bin_dir: "/usr/pgsql-{{ postgres_release }}/bin"
+repmgr_conf_dir: '/etc/repmgr/{{ postgres_release }}'

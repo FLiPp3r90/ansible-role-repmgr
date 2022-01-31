@@ -21,7 +21,6 @@ repmgr_install_repository: true
 
 # repmgr vars
 repmgr_conf_file: 'repmgr.conf'
-repmgr_conf_dir: '/etc/repmgr/{{ postgres_release }}'
 repmgr_user: 'repmgr'
 repmgr_dbname: 'repmgr'
 

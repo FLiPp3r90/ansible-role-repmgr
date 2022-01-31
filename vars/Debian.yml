@@ -7,5 +7,6 @@ postgresql_server_package: "postgresql-{{ postgres_release }}"
 repmgr_service: "repmgrd"
 postgres_service: "postgresql"
 
-# repmgr binary directory
+# repmgr directories
 repmgr_bin_dir: "/usr/bin"
+repmgr_conf_dir: '/etc'
