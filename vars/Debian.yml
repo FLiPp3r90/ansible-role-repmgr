@@ -1,4 +1,7 @@
 ---
+# Thirs-party repository
+repmgr_repository: "deb https://dl.2ndquadrant.com/default/release/apt {{ ansible_distribution_release }}-2ndquadrant main"
+
 # packages
 repmgr_package: "postgresql-{{ postgres_release }}-repmgr"
 postgresql_server_package: "postgresql-{{ postgres_release }}"
@@ -10,3 +13,8 @@ postgres_service: "postgresql"
 # repmgr directories
 repmgr_bin_dir: "/usr/bin"
 repmgr_conf_dir: '/etc'
+
+# /etc/default/repmgrd configuration
+repmgrd_conf:
+  REPMGRD_ENABLED: "yes"
+  REPMGRD_CONF: "/etc/repmgr.conf"
