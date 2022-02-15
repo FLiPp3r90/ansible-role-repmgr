@@ -9,11 +9,11 @@ postgres_group: postgres
 # postgres vars
 repmgr_postgres_admin_user: 'postgres'
 repmgr_postgres_admin_user_group: 'postgres'
-postgres_ssh_dir: '/var/lib/pgsql/.ssh'
+postgres_ssh_dir: "{{ postgres_home_dir }}/.ssh"
 postgres_ssh_rsa_key: "{{ postgres_ssh_dir }}/id_rsa"
 
 # postgres vars
-postgres_data_directory: "{{ postgresql_data_directory | default('/var/lib/pgsql/{{ postgres_release }}/data') }}"
+postgres_data_directory: "{{ postgresql_data_directory | default('{{ postgres_home_dir }}/{{ postgres_release }}/data') }}"
 postgres_conf_directory: "{{ postgresql_conf_directory | default('/etc/postgresql/{{ postgres_release }}/data') }}"
 
 # repmgr repository
