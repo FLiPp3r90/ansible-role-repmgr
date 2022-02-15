@@ -15,6 +15,6 @@ repmgr_bin_dir: "/usr/bin"
 repmgr_conf_dir: '/etc'
 
 # /etc/default/repmgrd configuration
-repmgrd_conf:
+repmgr_repmgrd_conf:
   REPMGRD_ENABLED: "yes"
   REPMGRD_CONF: "/etc/repmgr.conf"

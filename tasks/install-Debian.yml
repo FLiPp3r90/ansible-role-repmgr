@@ -3,7 +3,7 @@
 
 - name: repmgr | install repmgr repository
   ansible.builtin.apt_repository:
-    filename: "repmgr_{{ postgres_release }}"
+    filename: "repmgr_2ndquadrant"
     repo: "{{ repmgr_repository }}"
     state: present
   when: repmgr_install_repository|bool
@@ -24,4 +24,4 @@
     path: /etc/default/repmgrd
     regexp: "^#?{{ item.key }}="
     line: "{{ item.key }}={{ item.value }}"
-  with_dict: "{{ repmgrd_conf }}"
+  with_dict: "{{ repmgr_repmgrd_conf }}"
