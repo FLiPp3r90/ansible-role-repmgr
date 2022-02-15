@@ -9,6 +9,10 @@ postgresql_server_package: "postgresql-{{ postgres_release }}"
 # services
 repmgr_service: "repmgrd"
 postgres_service: "postgresql"
+repmgr_start_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main start"
+repmgr_stop_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main stop"
+repmgr_restart_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main restart"
+repmgr_reload_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main reload"
 
 # repmgr directories
 repmgr_bin_dir: "/usr/bin"

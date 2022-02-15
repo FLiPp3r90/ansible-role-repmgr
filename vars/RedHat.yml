@@ -6,6 +6,10 @@ postgresql_server_package: "postgresql{{ postgres_release }}-server"
 # services
 repmgr_service: "repmgr{{postgres_release}}"
 postgres_service: "postgresql-{{postgres_release}}"
+repmgr_start_command: "/usr/bin/systemctl start {{ postgres_service }}.service"
+repmgr_stop_command: "/usr/bin/systemctl stop {{ postgres_service }}.service"
+repmgr_restart_command: "/usr/bin/systemctl restart {{ postgres_service }}.service"
+repmgr_reload_command: "/usr/bin/systemctl reload {{ postgres_service }}.service"
 
 # repmgr repository
 repmgr_repository: "https://dl.2ndquadrant.com/default/release/browse/rpm/packages/rhel/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/{{ postgres_release }}"

@@ -1,0 +1,8 @@
+# {{ansible_managed}}
+
+# this is required when running sudo over ssh without -t:
+Defaults:{{ postgres_user }} !requiretty
+{{ postgres_user }} ALL = NOPASSWD: {{ repmgr_start_command }}, \
+{{ repmgr_stop_command }}, \
+{{ repmgr_restart_command }}, \
+{{ repmgr_reload_command }}

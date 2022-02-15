@@ -25,8 +25,8 @@ repmgr_user: 'repmgr'
 repmgr_dbname: 'repmgr'
 
 # repmgr config options
-repmgr_conninfo: "host=127.0.0.1 user={{repmgr_postgres_user}} dbname={{ repmgr_dbname }}"
-repmgr_node_id: 1
+repmgr_conninfo: "host={{ ansible_hostname }} user={{repmgr_postgres_user}} dbname={{ repmgr_dbname }} connect_timeout=2"
+repmgr_node_id: '1'
 repmgr_failover: 'automatic'
 repmgr_loglevel: 'INFO'
 repmgr_logfacility: 'STDERR'
@@ -35,10 +35,6 @@ repmgr_log_file: '/var/log/repmgr/repmgr.log'
 # repmgr commands
 repmgr_promote_command: "{{ repmgr_bin_dir }}/repmgr standby promote -f {{ repmgr_conf_dir }}/repmgr.conf --log-to-file"
 repmgr_follow_command: "{{ repmgr_bin_dir }}/repmgr standby follow -f {{ repmgr_conf_dir }}/repmgr.conf --log-to-file"
-repmgr_start_command: "/usr/bin/sudo /usr/bin/systemctl start {{ postgres_service }}.service"
-repmgr_stop_command: "/usr/bin/sudo /usr/bin/systemctl stop {{ postgres_service }}.service"
-repmgr_restart_command: "/usr/bin/sudo /usr/bin/systemctl restart {{ postgres_service }}.service"
-
 
 # role management
 repmgr_is_master: false
