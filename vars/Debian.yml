@@ -25,3 +25,4 @@ repmgr_conf_dir: '/etc'
 repmgr_repmgrd_conf:
   REPMGRD_ENABLED: "yes"
   REPMGRD_CONF: "/etc/repmgr.conf"
+  
