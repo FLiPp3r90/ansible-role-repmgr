@@ -4,7 +4,7 @@
   become: true
 
   roles:
-    - role: FLiPp3r90.repmgr
+    - role: flipp3r90.repmgr
       vars:
         repmgr_install_only: true
         repmgr_install_postgresql: true
