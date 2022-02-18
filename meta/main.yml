@@ -3,7 +3,7 @@ dependencies: []
 
 galaxy_info:
   role_name: repmgr
-  author: FLiPp3r90
+  author: flipp3r90
   description: Replication manager for PostgreSQL
   company: "T-Systems MMS"
   license: Apache-2.0

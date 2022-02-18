@@ -10,7 +10,7 @@ name: CI
 
 defaults:
   run:
-    working-directory: 'FLiPp3r90.repmgr'
+    working-directory: 'flipp3r90.repmgr'
 
 jobs:
 
@@ -21,7 +21,7 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v2
         with:
-          path: 'FLiPp3r90.repmgr'
+          path: 'flipp3r90.repmgr'
 
       - name: Set up Python 3.
         uses: actions/setup-python@v2
@@ -42,12 +42,14 @@ jobs:
       matrix:
         distro:
           - centos7
+          - debian10
+          - debian11
 
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v2
         with:
-          path: 'FLiPp3r90.repmgr'
+          path: 'flipp3r90.repmgr'
 
       - name: Set up Python 3.
         uses: actions/setup-python@v2
