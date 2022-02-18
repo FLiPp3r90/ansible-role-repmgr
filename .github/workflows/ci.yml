@@ -5,6 +5,7 @@ name: CI
   push:
     branches:
       - master
+      - wip_debian
   schedule:
     - cron: "0 3 * * 5"
 
