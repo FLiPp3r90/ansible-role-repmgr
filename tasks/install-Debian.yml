@@ -1,17 +1,17 @@
 ---
 # PostGreSQL is Managed by anxs.postgresql
 
+- name: Download and install GPG key
+  ansible.builtin.apt_key:
+    state: present
+    url: https://dl.2ndquadrant.com/gpg-key.asc
+  when: repmgr_install_repository|bool
+
 - name: repmgr | install repmgr repository
   ansible.builtin.apt_repository:
     filename: "repmgr_2ndquadrant"
     repo: "{{ repmgr_repository }}"
     state: present
-  when: repmgr_install_repository|bool
-
-- name: Download and install GPG key
-  ansible.builtin.apt_key:
-    state: present
-    url: https://dl.2ndquadrant.com/gpg-key.asc
   when: repmgr_install_repository|bool
 
 - name: repmgr | install repmgr
