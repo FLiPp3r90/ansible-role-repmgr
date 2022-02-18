@@ -1,6 +1,11 @@
 ---
 # PostGreSQL is Managed by anxs.postgresql
 
+- name: Ensure GPG is installed
+  ansible.builtin.package:
+    name: gpg
+    state: present
+
 - name: Download and install GPG key
   ansible.builtin.apt_key:
     state: present
