@@ -2,9 +2,10 @@
 # PostGreSQL is Managed by anxs.postgresql
 
 - name: Ensure GPG is installed
-  ansible.builtin.package:
+  ansible.builtin.apt:
     name: gpg
     state: present
+    update_cache: yes
 
 - name: Download and install GPG key
   ansible.builtin.apt_key:
@@ -20,9 +21,10 @@
   when: repmgr_install_repository|bool
 
 - name: repmgr | install repmgr
-  ansible.builtin.package:
+  ansible.builtin.apt:
     name: "{{ repmgr_package }}"
     state: present
+    update_cache: yes
 
 - name: repmgr | configure /etc/default/repmgrd
   ansible.builtin.lineinfile:
