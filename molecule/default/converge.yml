@@ -4,7 +4,7 @@
   become: true
 
   roles:
-    - role: flipp3r90.repmgr
+    - role: anxs.postgresql
       vars:
-        repmgr_install_only: true
-        repmgr_install_postgresql: true
+        postgresql_version: 12  
+    - role: flipp3r90.repmgr
