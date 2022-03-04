@@ -6,5 +6,5 @@
   roles:
     - role: anxs.postgresql
       vars:
-        postgresql_version: 12  
+        postgresql_version: 12
     - role: flipp3r90.repmgr
