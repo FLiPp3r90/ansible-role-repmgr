@@ -1,8 +1,6 @@
 ---
 dependency:
   name: galaxy
-  roles:
-  - anxs.postgresql
 driver:
   name: docker
 platforms:
