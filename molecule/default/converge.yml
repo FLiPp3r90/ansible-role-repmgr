@@ -7,5 +7,5 @@
     - role: anxs.postgresql
       vars:
         postgresql_version: 12
-        ansible_python_interpreter: "{{ 'python3' if ansible_distribution == 'Debian' else 'python' }}"
+        ansible_python_interpreter: "{{ 'python3' if ansible_facts['os_family'] == 'Debian' else 'python' }}"
     - role: flipp3r90.repmgr
