@@ -1,0 +1,11 @@
+---
+- name: Add gpg command to debian image
+  hosts: all
+  tasks:
+  - name: install gpg package
+    apt:
+      pkg: gpg
+      state: latest
+      update_cache: true
+    become: true
+  when: ansible_distribution == 'Debian'
