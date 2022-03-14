@@ -13,6 +13,12 @@ platforms:
     pre_build_image: true
 provisioner:
   name: ansible
+  config_options:
+    defaults:
+      gathering: smart
+      fact_caching: jsonfile
+      fact_caching_connection: /tmp/facts_cache
+      fact_caching_timeout: 7200
   playbooks:
     prepare: prepare.yml
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
