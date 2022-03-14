@@ -5,7 +5,7 @@
   ansible.builtin.apt:
     name: gpg
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Download and install GPG key
   ansible.builtin.apt_key:
@@ -24,7 +24,7 @@
   ansible.builtin.apt:
     name: "{{ repmgr_package }}"
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: repmgr | configure /etc/default/repmgrd
   ansible.builtin.lineinfile:
