@@ -1,14 +1,11 @@
 ---
-- name: Debian Prepare
-  hosts: all
-  tasks:
-  - name: Debian Prepare | Include vars
-    include_vars:
-      file: vars.yml
+- name: Debian Prepare | Include vars
+  include_vars:
+    file: vars.yml
 
-  - name: Debian Prepare | install gpg package
-    apt:
-      pkg: gpg
-      state: latest
-      update_cache: true
-    become: true
+- name: Debian Prepare | install gpg package
+  apt:
+    pkg: gpg
+    state: latest
+    update_cache: true
+  become: true

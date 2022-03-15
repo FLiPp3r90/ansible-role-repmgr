@@ -1,4 +1,6 @@
 ---
-- name: Prepare | Import OS dependant prepare.yml
-  gather_facts: true
-  import_playbook: "../{{ ansible_facts['distribution'] }}/prepare.yml"
+- name: Prepare | Prepare host to be converged
+  hosts: all
+  tasks:
+    - name: Prepare | Include tasks from OS specific files
+      include_tasks: "../{{ ansible_distribution }}/prepare.yml"
