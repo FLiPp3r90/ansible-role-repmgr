@@ -1,3 +1,4 @@
 ---
 - name: Prepare | Import OS dependant prepare.yml
+  gather_facts: true
   import_playbook: "../{{ ansible_facts['distribution'] }}/prepare.yml"
