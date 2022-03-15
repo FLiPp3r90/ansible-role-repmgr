@@ -1,11 +1,5 @@
 ---
-- name: Add gpg command to debian image
+- name: Prepare | Run OS dependant prepare.yml
   hosts: all
   tasks:
-  - name: install gpg package
-    apt:
-      pkg: gpg
-      state: latest
-      update_cache: true
-    become: true
-    when: ansible_distribution == 'Debian'
+  - include "../{{ ansible_distribution }}/prepare.yml"
