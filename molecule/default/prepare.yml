@@ -1,5 +1,4 @@
 ---
-- name: Prepare | Run OS dependant prepare.yml
+- name: Prepare | Import OS dependant prepare.yml
   hosts: all
-  tasks:
-  - include "../{{ ansible_distribution }}/prepare.yml"
+  import_playbooks: "../{{ ansible_distribution }}/prepare.yml"
