@@ -23,7 +23,7 @@
   rpm_key:
     state: present
     key: https://dl.2ndquadrant.com/gpg-key.asc
-  when: repmgr_install_postgresql|bool
+  when: repmgr_install_repository|bool
 
 - name: repmgr | install repmgr yum repository
   yum_repository:
