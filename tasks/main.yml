@@ -20,6 +20,8 @@
   when:
     - repmgr_bootstrap|bool
     - not repmgr_install_only|bool
+  tags:
+    - bootstrap
 
 - name: Main | Include verify_cluster task
   include: verify_cluster.yml
