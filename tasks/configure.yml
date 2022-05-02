@@ -23,3 +23,10 @@
     owner: root
     group: root
     mode: '0440'
+
+- name: configure | Ensure repmgr logfile path exist
+  file:
+    path: "{{ repmgr_log_file | dirname }}"
+    state: directory
+    owner: "{{ postgres_user }}"
+    group: "{{ postgres_group }}"
