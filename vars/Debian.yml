@@ -9,10 +9,12 @@ postgresql_server_package: "postgresql-{{ postgres_release }}"
 # services
 repmgr_service: "repmgrd"
 postgres_service: "postgresql"
-repmgr_start_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main start"
-repmgr_stop_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main stop"
-repmgr_restart_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main restart"
-repmgr_reload_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main reload"
+repmgr_service_start_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main start"
+repmgr_service_stop_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main stop"
+repmgr_service_restart_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main restart"
+repmgr_service_reload_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main reload"
+repmgr_repmgrd_service_start_command: "/usr/bin/systemctl restart repmgrd"
+repmgr_repmgrd_service_stop_command: "/usr/bin/systemctl stop repmgrd"
 
 # postgresql directory
 postgres_home_dir: /var/lib/postgresql

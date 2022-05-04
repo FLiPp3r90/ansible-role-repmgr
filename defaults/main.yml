@@ -37,6 +37,7 @@ repmgr_promote_command: "{{ repmgr_bin_dir }}/repmgr standby promote -f {{ repmg
 repmgr_follow_command: "{{ repmgr_bin_dir }}/repmgr standby follow -f {{ repmgr_conf_dir }}/repmgr.conf --log-to-file"
 
 # role management
+repmgr_always_promote: false
 repmgr_is_master: false
 repmgr_register_master: false
 repmgr_register_standby: false
