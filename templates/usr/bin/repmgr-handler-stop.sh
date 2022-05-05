@@ -14,5 +14,6 @@ then
         ssh $standby_host "repmgr standby switchover --always-promote"
     fi
 fi
+repmgr daemon stop
 
 exit 0

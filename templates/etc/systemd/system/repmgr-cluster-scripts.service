@@ -2,7 +2,7 @@
 
 [Unit]
 Description=Repmgr cluster scripts
-After=network.target postgresql.service repmgrd.service ssh.service
+After=default.target
 
 [Service]
 Type=oneshot
