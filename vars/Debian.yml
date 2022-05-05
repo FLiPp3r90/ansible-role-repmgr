@@ -13,8 +13,8 @@ repmgr_service_start_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} mai
 repmgr_service_stop_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main stop"
 repmgr_service_restart_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main restart"
 repmgr_service_reload_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main reload"
-repmgr_repmgrd_service_start_command: "/usr/bin/systemctl restart repmgrd"
-repmgr_repmgrd_service_stop_command: "/usr/bin/systemctl stop repmgrd"
+repmgr_repmgrd_service_start_command: "/usr/bin/systemctl restart {{ repmgr_service }}"
+repmgr_repmgrd_service_stop_command: "/usr/bin/systemctl stop {{ repmgr_service }}"
 
 # postgresql directory
 postgres_home_dir: /var/lib/postgresql

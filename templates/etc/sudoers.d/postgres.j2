@@ -2,7 +2,9 @@
 
 # this is required when running sudo over ssh without -t:
 Defaults:{{ postgres_user }} !requiretty
-{{ postgres_user }} ALL = NOPASSWD: {{ repmgr_start_command }}, \
-{{ repmgr_stop_command }}, \
-{{ repmgr_restart_command }}, \
-{{ repmgr_reload_command }}
+{{ postgres_user }} ALL = NOPASSWD: {{ repmgr_service_start_command }}, \
+{{ repmgr_service_stop_command }}, \
+{{ repmgr_service_restart_command }}, \
+{{ repmgr_service_reload_command }}, \
+{{ repmgr_repmgrd_service_start_command }}, \
+{{ repmgr_repmgrd_service_stop_command }}
