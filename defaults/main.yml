@@ -1,30 +1,43 @@
 ---
-# versions
+# Versions
 postgres_release: "{{ postgresql_version | default(12) }}"
 
-# os user
+# Os user
 postgres_user: postgres
 postgres_group: postgres
 
-# postgres vars
+# Postgres vars
 repmgr_postgres_admin_user: 'postgres'
 repmgr_postgres_admin_user_group: 'postgres'
 postgres_ssh_dir: "{{ postgres_home_dir }}/.ssh"
 postgres_ssh_rsa_key: "{{ postgres_ssh_dir }}/id_rsa"
-
-# postgres vars
 postgres_data_directory: "{{ postgresql_data_directory | default('{{ postgres_home_dir }}/{{ postgres_release }}/data') }}"
 postgres_conf_directory: "{{ postgresql_conf_directory | default('/etc/postgresql/{{ postgres_release }}/data') }}"
 
-# repmgr repository
+# Repmgr repository
 repmgr_install_repository: true
 
-# repmgr vars
+# Systemd services
+## repmgr-cluster-scripts service
+## Used to handle reboot of the cluster by cloning from available node.
+## To lighten source decision, use a Virtual IP or use /etc/hosts.
+repmgr_cluster_scripts_replication_source: "cluster.my.company.example.com"
+## Set autostart
+repmgr_cluster_scripts_enabled: false
+
+
+## Legacy services from packages
+## Set autostart
+postgres_service_enabled: true
+repmgr_repmgrd_service_enabled: true
+
+
+# Repmgr vars
 repmgr_conf_file: 'repmgr.conf'
 repmgr_user: 'repmgr'
 repmgr_dbname: 'repmgr'
 
-# repmgr config options
+# Repmgr config options
 repmgr_conninfo: "host={{ ansible_hostname }} user={{repmgr_postgres_user}} dbname={{ repmgr_dbname }} connect_timeout=2"
 repmgr_node_id: '1'
 repmgr_failover: 'automatic'
@@ -32,11 +45,11 @@ repmgr_loglevel: 'INFO'
 repmgr_logfacility: 'STDERR'
 repmgr_log_file: '/var/log/repmgr/repmgr.log'
 
-# repmgr commands
+# Repmgr commands
 repmgr_promote_command: "{{ repmgr_bin_dir }}/repmgr standby promote -f {{ repmgr_conf_dir }}/repmgr.conf --log-to-file"
 repmgr_follow_command: "{{ repmgr_bin_dir }}/repmgr standby follow -f {{ repmgr_conf_dir }}/repmgr.conf --log-to-file"
 
-# role management
+# Role management
 repmgr_always_promote: false
 repmgr_is_master: false
 repmgr_register_master: false

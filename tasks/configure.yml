@@ -4,7 +4,6 @@
     path: /run/repmgr/
     owner: "{{ postgres_user }}"
     group: "{{ postgres_group }}"
-    mode: '0740'
     state: directory
 
 - name: repmgr | create repmgr conf
