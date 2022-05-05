@@ -46,3 +46,10 @@
   when:
     - repmgr_register_standby|bool
     - not repmgr_install_only|bool
+
+- name: Main | Include services tasks
+  include: service.yml
+  when:
+    - not repmgr_install_only|bool
+  tags:
+    - service

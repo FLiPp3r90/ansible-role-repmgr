@@ -1,0 +1,16 @@
+# {{ ansible_managed }}
+
+[Unit]
+Description=Repmgr cluster scripts
+After=network.target postgresql.service repmgrd.service ssh.service
+
+[Service]
+Type=oneshot
+User=postgres
+ExecStart=/usr/bin/repmgr-handler-start.sh
+ExecStop=/usr/bin/repmgr-handler-stop.sh
+RemainAfterExit=true
+StandardOutput=journal
+
+[Install]
+WantedBy=default.target

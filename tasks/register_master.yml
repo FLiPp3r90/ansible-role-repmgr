@@ -12,4 +12,3 @@
   service:
     name: "{{ repmgr_service }}"
     state: started
-    enabled: true
