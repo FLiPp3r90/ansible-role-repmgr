@@ -18,6 +18,7 @@ repmgr_repmgrd_service_stop_command: "/usr/bin/systemctl stop {{ repmgr_service 
 
 # postgresql directory
 postgres_home_dir: /var/lib/postgresql
+repmgr_pg_rewind_path: "/usr/lib/postgresql/{{ postgres_release }}/bin/pg_rewind"
 
 # repmgr directories
 repmgr_bin_dir: "/usr/bin"
@@ -26,4 +27,5 @@ repmgr_conf_dir: '/etc'
 # /etc/default/repmgrd configuration
 repmgr_repmgrd_conf:
   REPMGRD_ENABLED: "yes"
-  REPMGRD_CONF: "/etc/repmgr.conf"
+  REPMGRD_CONF: /etc/repmgr.conf
+  REPMGRD_OPTS: --daemonize=false

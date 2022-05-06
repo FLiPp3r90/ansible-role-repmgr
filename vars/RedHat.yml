@@ -22,6 +22,7 @@ postgres_repo: "https://download.postgresql.org/pub/repos/yum/{{ postgres_releas
 
 # postgresql directory
 postgres_home_dir: /var/lib/pgsql
+repmgr_pg_rewind_path: "/usr/pgsql-{{ postgres_release }}/bin/pg_rewind"
 
 # repmgr directories
 repmgr_bin_dir: "/usr/pgsql-{{ postgres_release }}/bin"
