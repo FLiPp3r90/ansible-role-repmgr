@@ -30,5 +30,5 @@
   ansible.builtin.lineinfile:
     path: /etc/default/repmgrd
     regexp: "^#?{{ item.key }}="
-    line: "{{ item.key }}={{ item.value }}"
+    line: "{{ item.key }}=\"{{ item.value }}\""
   with_dict: "{{ repmgr_repmgrd_conf }}"
