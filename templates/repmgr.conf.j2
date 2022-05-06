@@ -29,6 +29,11 @@ log_level='{{ repmgr_loglevel }}'
 log_facility='{{ repmgr_logfacility }}'
 
 #
+# Switchover
+#
+wal_receive_check_timeout='{{ repmgr_wal_receive_check_timeout }}'
+
+#
 # Failover
 #
 failover={{ repmgr_failover }}
