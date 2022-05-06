@@ -1,4 +1,6 @@
 ---
+
+
 - name: Bootstrap | Create temporary directory to host pubkeys
   ansible.builtin.tempfile:
     state: directory
@@ -33,6 +35,7 @@
     mode: 0700
     owner: "{{ postgres_user }}"
     group: "{{ postgres_group }}"
+    comment: "{{ ansible_hostname }}"
   become: true
   become_user: "{{ repmgr_postgres_admin_user }}"
 
@@ -77,3 +80,9 @@
   delegate_to: localhost
   become: false
   run_once: true
+
+- name: Bootstrap | accept new host key
+  ansible.builtin.command: ssh -o StrictHostKeyChecking=accept-new {{ item }} /bin/true
+  with_items: "{{ ansible_play_hosts_all }}"
+  become: true
+  become_user: "{{ repmgr_postgres_admin_user }}"
