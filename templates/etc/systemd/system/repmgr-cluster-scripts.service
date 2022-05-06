@@ -7,8 +7,8 @@ After=default.target
 [Service]
 Type=oneshot
 User=postgres
-ExecStart=/usr/bin/repmgr-handler-start.sh
-ExecStop=/usr/bin/repmgr-handler-stop.sh
+ExecStart=/usr/bin/repmgr-cluster-start.sh
+ExecStop=/usr/bin/repmgr-cluster-stop.sh
 RemainAfterExit=true
 StandardOutput=journal
 
