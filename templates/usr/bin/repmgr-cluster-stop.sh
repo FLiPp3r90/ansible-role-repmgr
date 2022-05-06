@@ -11,9 +11,9 @@ then
 
     if [ $my_host = $standby_follow_primary ]
     then
-        ssh $standby_host "repmgr standby switchover --always-promote"
+        {{ repmgr_service_stop_command }}
+        ssh $standby_host "repmgr standby promote -F"
     fi
 fi
-repmgr daemon stop
 
 exit 0

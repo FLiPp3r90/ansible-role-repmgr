@@ -18,8 +18,8 @@
     mode: 0755
   with_items:
     - "etc/systemd/system/repmgr-cluster-scripts.service"
-    - "usr/bin/repmgr-handler-start.sh"
-    - "usr/bin/repmgr-handler-stop.sh"
+    - "usr/bin/repmgr-cluster-start.sh"
+    - "usr/bin/repmgr-cluster-stop.sh"
 
 - name: "Service | ensure repmgr-cluster-scripts service is running and {% if repmgr_cluster_scripts_enabled %}enabled{% else %}disabled{% endif %}" 
   service:

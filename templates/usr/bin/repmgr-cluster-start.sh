@@ -9,4 +9,7 @@ then
     sudo {{ repmgr_service_start_command }}
     repmgr standby register --force
 fi
+
+repmgr daemon start
+repmgr service unpause
 exit 0
