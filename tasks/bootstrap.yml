@@ -1,5 +1,5 @@
 ---
-- name: bootstrap | Create temporary directory to host pubkeys
+- name: Bootstrap | Create temporary directory to host pubkeys
   ansible.builtin.tempfile:
     state: directory
     suffix: pubkeys
@@ -8,7 +8,7 @@
   become: false
   run_once: true
 
-- name: bootstrap | Create temporary file to assemble pubkeys
+- name: Bootstrap | Create temporary file to assemble pubkeys
   ansible.builtin.tempfile:
     state: file
     suffix: authorized_keys
@@ -17,7 +17,7 @@
   become: false
   run_once: true
 
-- name: bootstrap | ensure ssh directory
+- name: Bootstrap | ensure ssh directory
   file:
     path: "{{ postgres_ssh_dir }}"
     state: directory
@@ -27,7 +27,7 @@
   become: true
   become_user: "{{ repmgr_postgres_admin_user }}"
 
-- name: bootstrap | create ssh rsa key for postgres user
+- name: Bootstrap | create ssh rsa key for postgres user
   openssh_keypair:
     path: "{{ postgres_ssh_rsa_key }}"
     mode: 0700
@@ -36,13 +36,13 @@
   become: true
   become_user: "{{ repmgr_postgres_admin_user }}"
 
-- name: bootstrap | fetch ssh public keys from nodes
+- name: Bootstrap | fetch ssh public keys from nodes
   fetch:
     dest: "{{ pubkeys_folder.path }}/{{ ansible_hostname }}_postgres_id_rsa_key.pub"
     src: "{{ postgres_ssh_rsa_key }}.pub"
     flat: true
 
-- name: bootstrap | merge public keys
+- name: Bootstrap | merge public keys
   assemble:
     src: "{{ pubkeys_folder.path }}"
     dest: "{{ authorized_keys_file.path }}"
@@ -50,7 +50,7 @@
   delegate_to: localhost
   run_once: true
 
-- name: bootstrap | copy authorized key to host
+- name: Bootstrap | copy authorized key to host
   copy:
     src: "{{ authorized_keys_file.path }}"
     dest: "{{ postgres_ssh_dir }}/authorized_keys"
@@ -58,7 +58,7 @@
     group: "{{ postgres_group }}"
     mode: 0700
 
-- name: bootstrap | set .ssh directory privileges
+- name: Bootstrap | set .ssh directory privileges
   file:
     path: "{{ postgres_ssh_dir }}"
     owner: "{{ postgres_user }}"
@@ -67,7 +67,7 @@
     recurse: true
     state: directory
 
-- name: bootstrap | delete temporary files & folder
+- name: Bootstrap | delete temporary files & folder
   file:
     path: "{{ item }}"
     state: absent

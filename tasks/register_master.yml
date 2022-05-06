@@ -1,5 +1,5 @@
 ---
-- name: repmgr | register master node
+- name: Register master | register master node
   command: "{{ repmgr_bin_dir }}/repmgr -f {{ repmgr_conf_dir }}/{{ repmgr_conf_file }} primary register"
   become: true
   become_user: "{{ repmgr_postgres_admin_user }}"
@@ -8,7 +8,7 @@
     - result is failed
   notify: start repmgrd
 
-- name: repmgr | ensure repmgrd is started
+- name: Register master | ensure repmgrd is started
   service:
     name: "{{ repmgr_service }}"
     state: started

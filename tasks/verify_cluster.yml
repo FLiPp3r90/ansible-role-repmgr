@@ -1,5 +1,5 @@
 ---
-- name: repmgr | verify node status
+- name: Verify | node status
   command: "{{ repmgr_bin_dir }}/repmgr -f {{ repmgr_conf_dir }}/{{ repmgr_conf_file }} node check"
   args:
     warn: false

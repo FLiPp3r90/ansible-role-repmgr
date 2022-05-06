@@ -1,34 +1,39 @@
 ---
 # PostGreSQL is Managed by anxs.postgresql
 
-- name: Ensure GPG is installed
+- name: Install - Debian | Ensure GPG is installed
   ansible.builtin.apt:
     name: gpg
     state: present
     update_cache: true
 
-- name: Download and install GPG key
+- name: Install - Debian | Download and install GPG key
   ansible.builtin.apt_key:
     state: present
     url: https://dl.2ndquadrant.com/gpg-key.asc
   when: repmgr_install_repository|bool
 
-- name: repmgr | install repmgr repository
+- name: Install - Debian | install repmgr repository
   ansible.builtin.apt_repository:
     filename: "repmgr_2ndquadrant"
     repo: "{{ repmgr_repository }}"
     state: present
   when: repmgr_install_repository|bool
 
-- name: repmgr | install repmgr
+- name: Install - Debian | install repmgr
   ansible.builtin.apt:
     name: "{{ repmgr_package }}"
     state: present
     update_cache: true
 
-- name: repmgr | configure /etc/default/repmgrd
+- name: Install - Debian | configure /etc/default/repmgrd
   ansible.builtin.lineinfile:
     path: /etc/default/repmgrd
     regexp: "^#?{{ item.key }}="
     line: "{{ item.key }}=\"{{ item.value }}\""
   with_dict: "{{ repmgr_repmgrd_conf }}"
+
+- name: Install - Debian | restart postgresql to load repmgr
+  ansible.builtin.service:
+    name: "{{ postgres_service }}"
+    state: restarted

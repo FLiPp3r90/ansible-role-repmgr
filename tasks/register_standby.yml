@@ -1,5 +1,5 @@
 ---
-- name: repmgr | register standby node
+- name: Register standby | register standby node
   command: "{{ repmgr_bin_dir }}/repmgr -f {{ repmgr_conf_dir }}/{{ repmgr_conf_file }} standby register"
   when:
     - not repmgr_is_master|bool
