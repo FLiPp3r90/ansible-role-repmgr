@@ -32,8 +32,3 @@
     regexp: "^#?{{ item.key }}="
     line: "{{ item.key }}=\"{{ item.value }}\""
   with_dict: "{{ repmgr_repmgrd_conf }}"
-
-- name: Install - Debian | restart postgresql to load repmgr
-  ansible.builtin.service:
-    name: "{{ postgres_service }}"
-    state: restarted
