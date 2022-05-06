@@ -21,6 +21,10 @@
     - "usr/bin/repmgr-cluster-start.sh"
     - "usr/bin/repmgr-cluster-stop.sh"
 
+- name: "Service | reload systemd daemon"
+  systemd:
+    daemon-reload: true
+
 - name: "Service | ensure repmgr-cluster-scripts service is running and {% if repmgr_cluster_scripts_enabled %}enabled{% else %}disabled{% endif %}" 
   service:
     name: "repmgr-cluster-scripts"
@@ -28,7 +32,3 @@
     enabled: "{{ repmgr_cluster_scripts_enabled }}"
   when:
     - repmgr_cluster_scripts_enabled
-
-- name: "Service | reload systemd daemon"
-  systemd:
-    daemon-reload: true
