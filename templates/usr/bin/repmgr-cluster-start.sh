@@ -36,7 +36,7 @@ timer_tick=0
 
 # Test VIP availability
 
-vip_return=$(psql -q -c '\c "host={{ repmgr_cluster_scripts_replication_source }} port=5432 dbname={{ repmgr_dbname }} user={{ repmgr_user }} connect_timeout=2 sslmode=disable"' -c 'select inet_server_addr();')
+vip_return=$(psql -q "host={{ repmgr_cluster_scripts_replication_source }} port=5432 dbname={{ repmgr_dbname }} user={{ repmgr_user }} connect_timeout=2 sslmode=disable" -c 'select inet_server_addr();')
 code_return=$?
 until_switch=$code_return
 
