@@ -1,0 +1,47 @@
+---
+- name: Install - RedHat | Download and install GPG key
+  rpm_key:
+    state: present
+    key: https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG
+  when: repmgr_install_postgresql|bool
+
+- name: Install - RedHat | Ensure Postgresql repository
+  yum_repository:
+    name: "{{ postgres_repo_name }}"
+    description: PostgreSQL repository
+    baseurl: "{{ postgres_repo }}"
+  when: repmgr_install_postgresql|bool
+
+- name: Install - RedHat | Ensure PostgreSQL packages are installed.
+  yum:
+    name: "{{ postgresql_server_package }}"
+    state: present
+    enablerepo: "{{ postgres_repo_name }}"
+  when: repmgr_install_postgresql|bool
+
+- name: Install - RedHat | Download and install GPG key
+  rpm_key:
+    state: present
+    key: https://dl.2ndquadrant.com/gpg-key.asc
+  when: repmgr_install_repository|bool
+
+- name: Install - RedHat | install repmgr yum repository
+  yum_repository:
+    name: "repmgr_{{ postgres_release }}"
+    description: 2ndquadrant yum repo
+    baseurl: "{{ repmgr_repository }}"
+  when: repmgr_install_repository|bool
+
+- name: Install - RedHat | install repmgr
+  yum:
+    name: "{{ repmgr_package }}"
+    state: present
+
+- name: Install - RedHat | create repmgr conf dir
+  file:
+    path: "{{ repmgr_conf_dir }}"
+    owner: "{{ postgres_user }}"
+    group: "{{ postgres_group }}"
+    mode: '0740'
+    state: directory
+    recurse: true

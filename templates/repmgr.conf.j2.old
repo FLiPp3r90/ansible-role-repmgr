@@ -23,6 +23,6 @@ loglevel={{repmgr_loglevel}}
 # Default: STDERR
 logfacility={{repmgr_logfacility}}
 
-pg_bindir={{repmgr_pg_bindir}}
+pg_bindir={{repmgr_bin_dir}}
 
 # vim:filetype=dosini

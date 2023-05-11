@@ -4,7 +4,8 @@
   become: true
 
   roles:
-    - role: FLiPp3r90.repmgr
+    - role: anxs.postgresql
       vars:
-        repmgr_install_only: true
-        repmgr_install_postgresql: true
+        postgresql_version: 12
+        ansible_python_interpreter: "{{ 'python3' if ansible_os_family == 'Debian' else 'python' }}"
+    - role: flipp3r90.repmgr

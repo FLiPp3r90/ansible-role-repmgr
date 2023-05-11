@@ -17,23 +17,32 @@ conninfo='{{ repmgr_conninfo }}'
 #
 # Common configuration
 #
-data_directory='{{postgres_data_directory}}'
-config_directory='{{postgres_conf_directory}}'
-pg_bindir='{{repmgr_pg_bindir}}'
+data_directory='{{ postgres_data_directory }}'
+config_directory='{{ postgres_conf_directory }}'
+pg_bindir='{{ repmgr_bin_dir }}'
 log_file='{{ repmgr_log_file }}'
 
 #
 # Logging
 #
-log_level='{{repmgr_loglevel}}'
-log_facility='{{repmgr_logfacility}}'
+log_level='{{ repmgr_loglevel }}'
+log_facility='{{ repmgr_logfacility }}'
+
+#
+# Switchover
+#
+wal_receive_check_timeout='{{ repmgr_wal_receive_check_timeout }}'
 
 #
 # Failover
 #
-failover='{{repmgr_failover}}'
+failover={{ repmgr_failover }}
+always_promote={{ repmgr_always_promote }}
 promote_command='{{ repmgr_promote_command }}'
 follow_command='{{ repmgr_follow_command }}'
-service_start_command='{{ repmgr_start_command }}'
-service_stop_command='{{ repmgr_stop_command }}'
-service_restart_command='{{ repmgr_restart_command }}'
+service_start_command='sudo {{ repmgr_service_start_command }}'
+service_stop_command='sudo {{ repmgr_service_stop_command }}'
+service_restart_command='sudo {{ repmgr_service_restart_command }}'
+service_reload_command='sudo {{ repmgr_service_reload_command }}'
+repmgrd_service_start_command='sudo {{ repmgr_repmgrd_service_start_command }}'
+repmgrd_service_stop_command='sudo {{ repmgr_repmgrd_service_stop_command }}'

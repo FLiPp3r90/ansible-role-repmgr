@@ -1,22 +1,12 @@
 ---
-- name: repmgr | ensure repmgr pid file directory
+- name: Configure | ensure repmgr pid file directory
   file:
     path: /run/repmgr/
     owner: "{{ postgres_user }}"
     group: "{{ postgres_group }}"
-    mode: '0740'
     state: directory
 
-- name: repmgr | create repmgr conf dir
-  file:
-    path: "{{ repmgr_conf_dir }}"
-    owner: "{{ postgres_user }}"
-    group: "{{ postgres_group }}"
-    mode: '0740'
-    state: directory
-    recurse: true
-
-- name: repmgr | create repmgr conf
+- name: Configure | create repmgr conf
   template:
     src: repmgr.conf.j2
     dest: "{{ repmgr_conf_dir }}/{{ repmgr_conf_file }}"
@@ -24,3 +14,18 @@
     group: "{{ postgres_group }}"
     mode: '0740'
   register: repmgr_conf
+
+- name: Configure | add sudo capability to postgres user
+  template:
+    src: etc/sudoers.d/postgres.j2
+    dest: /etc/sudoers.d/postgres
+    owner: root
+    group: root
+    mode: '0440'
+
+- name: configure | Ensure repmgr logfile path exist
+  file:
+    path: "{{ repmgr_log_file | dirname }}"
+    state: directory
+    owner: "{{ postgres_user }}"
+    group: "{{ postgres_group }}"

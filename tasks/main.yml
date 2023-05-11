@@ -1,30 +1,57 @@
 ---
-- include: install.yml
 
-- include: configure.yml
+- name: Main | Include vars based on ansible_os_family
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "../vars/{{ ansible_os_family }}_{{ ansible_distribution_major_version }}.yml"
+    - "../vars/{{ ansible_os_family }}.yml"
+    - "../vars/empty.yml"
+  tags:
+    - always
+
+- name: Main | Include task based on ansible_os_family
+  include: "install-{{ ansible_os_family }}.yml"
+  when: ansible_os_family in ['RedHat', 'Debian']
+
+- name: Main | Include configure task
+  include: configure.yml
   when: not repmgr_install_only|bool
 
-- include: bootstrap.yml
+- name: Main | Include bootstrap task
+  include: bootstrap.yml
   when:
     - repmgr_bootstrap|bool
     - not repmgr_install_only|bool
+  tags:
+    - bootstrap
 
-- include: verify_cluster.yml
+- name: Main | Include verify_cluster task
+  include: verify_cluster.yml
   when:
     - repmgr_register_master|bool or repmgr_register_standby|bool or repmgr_clone_standby|bool
     - not repmgr_install_only|bool
 
-- include: register_master.yml
+- name: Main | Include master registering task
+  include: register_master.yml
   when:
     - repmgr_register_master|bool
     - not repmgr_install_only|bool
 
-- include: clone_standby.yml
+- name: Main | Include standby cloning task
+  include: clone_standby.yml
   when:
     - repmgr_clone_standby|bool
     - not repmgr_install_only|bool
 
-- include: register_standby.yml
+- name: Main | Include standby registering task
+  include: register_standby.yml
   when:
     - repmgr_register_standby|bool
     - not repmgr_install_only|bool
+
+- name: Main | Include services tasks
+  include: service.yml
+  when:
+    - not repmgr_install_only|bool
+  tags:
+    - service

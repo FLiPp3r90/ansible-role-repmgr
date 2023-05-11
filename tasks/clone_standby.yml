@@ -1,5 +1,5 @@
 ---
-- name: repmgr | stop standby postgres
+- name: Clone | stop standby postgres
   service:
     name: "{{ postgres_service }}"
     state: stopped
@@ -7,8 +7,8 @@
     - not repmgr_is_master|bool
     - result is failed
 
-- name: repmgr | clone standby nodes
-  command: "/usr/pgsql-{{ postgres_release }}/bin/repmgr -f {{ repmgr_conf_dir }}/{{ repmgr_conf_file }} -h {{ repmgr_default_master }}\
+- name: Clone | clone standby nodes
+  command: "{{ repmgr_bin_dir }}/repmgr -f {{ repmgr_conf_dir }}/{{ repmgr_conf_file }} -h {{ repmgr_default_master }} \
             -U {{ repmgr_user }} -d {{ repmgr_dbname }} standby clone -F"
   when:
     - not repmgr_is_master|bool
@@ -16,7 +16,7 @@
   become: true
   become_user: "{{ repmgr_postgres_admin_user }}"
 
-- name: repmgr | start standby postgres
+- name: Clone | start standby postgres
   service:
     name: "{{ postgres_service }}"
     state: started

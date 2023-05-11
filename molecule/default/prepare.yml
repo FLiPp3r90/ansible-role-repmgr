@@ -1,0 +1,6 @@
+---
+- name: Prepare | Prepare host to be converged
+  hosts: all
+  tasks:
+    - name: Prepare | Include tasks from OS specific files
+      include_tasks: "../{{ ansible_distribution }}/prepare.yml"

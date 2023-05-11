@@ -1,0 +1,31 @@
+---
+# Thirs-party repository
+repmgr_repository: "deb https://dl.2ndquadrant.com/default/release/apt {{ ansible_distribution_release }}-2ndquadrant main"
+
+# packages
+repmgr_package: "postgresql-{{ postgres_release }}-repmgr"
+postgresql_server_package: "postgresql-{{ postgres_release }}"
+
+# services
+repmgr_service: "repmgrd"
+postgres_service: "postgresql"
+repmgr_service_start_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main start"
+repmgr_service_stop_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main stop"
+repmgr_service_restart_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main restart"
+repmgr_service_reload_command: "/usr/bin/pg_ctlcluster {{ postgres_release }} main reload"
+repmgr_repmgrd_service_start_command: "/usr/bin/systemctl restart {{ repmgr_service }}"
+repmgr_repmgrd_service_stop_command: "/usr/bin/systemctl stop {{ repmgr_service }}"
+
+# postgresql directory
+postgres_home_dir: /var/lib/postgresql
+repmgr_pg_rewind_path: "/usr/lib/postgresql/{{ postgres_release }}/bin/pg_rewind"
+
+# repmgr directories
+repmgr_bin_dir: "/usr/bin"
+repmgr_conf_dir: '/etc'
+
+# /etc/default/repmgrd configuration
+repmgr_repmgrd_conf:
+  REPMGRD_ENABLED: "yes"
+  REPMGRD_CONF: /etc/repmgr.conf
+  REPMGRD_OPTS: --daemonize=false
